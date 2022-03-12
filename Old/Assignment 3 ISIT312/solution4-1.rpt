@@ -1,0 +1,14 @@
+scala> val lines = sc.textFile("sales.txt")
+lines: org.apache.spark.rdd.RDD[String] = sales.txt MapPartitionsRDD[14] at textFile at <console>:24
+
+scala> val pairs = lines.map(s=>(s.split(" ")(0),(s.split(" ")(1).toInt)))
+pairs: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[11] at map at <console>:26
+
+scala> pairs.collect()
+res10: Array[(String, Int)] = Array((bolt,45), (bolt,5), (drill,1), (drill,1), (screw,1), (screw,2), (screw,3))
+
+scala> val result = pairs.reduceByKey((a,b)=> a + b)
+result: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[12] at reduceByKey at <console>:28
+
+scala> result.collect()
+res11: Array[(String, Int)] = Array((screw,6), (bolt,50), (drill,2))

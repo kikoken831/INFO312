@@ -1,0 +1,138 @@
+>>>  
+>>>  --Student Name: Liang Leran Jenny
+>>>  --Student ID: 7063167
+>>>  
+>>>  --CREATE APPLICANT TABLE
+>>>  create external table applicant( 
+applicant_number VARCHAR(6), 
+first_name VARCHAR(30), 
+last_name VARCHAR(30), 
+date_of_birth DATE, 
+city VARCHAR(30), 
+state VARCHAR(30), 
+phone STRING, 
+fax STRING, 
+email VARCHAR(30) 
+) 
+row format delimited fields terminated by ',' stored as textfile location '/user/bigdata/a2/applicant';
+No rows affected (0.115 seconds)
+>>>  
+>>>  --CREATE APPLICATION TABLE
+>>>  create external table application( 
+application_number VARCHAR(3), 
+applicant_number VARCHAR(6), 
+position_number VARCHAR(8), 
+ename VARCHAR(30), 
+date DATE, 
+total_skills DECIMAL, 
+total_courses_passed DECIMAL, 
+total_past_employers DECIMAL, 
+total_years_experience DECIMAL, 
+education_level VARCHAR(30) 
+) 
+row format delimited fields terminated by ',' stored as textfile location '/user/bigdata/a2/application';
+No rows affected (0.161 seconds)
+>>>  
+>>>  --CREATE EMPLOYER TABLE
+>>>  create external table employer( 
+ename STRING, 
+city VARCHAR(30), 
+state VARCHAR(30), 
+phone STRING, 
+fax STRING, 
+email VARCHAR(30), 
+web VARCHAR(30) 
+) 
+row format delimited fields terminated by ',' stored as textfile location '/user/bigdata/a2/employer';
+No rows affected (0.145 seconds)
+>>>  
+>>>  --CREATE POSITION TABLE
+>>>  create external table position( 
+position_number VARCHAR(8), 
+title VARCHAR(30), 
+salary DECIMAL(10,2), 
+extras varchar(30), 
+bonus DECIMAL(10,2), 
+specification VARCHAR(30), 
+ename STRING 
+) 
+row format delimited fields terminated by ',' stored as textfile location '/user/bigdata/a2/position';
+No rows affected (0.154 seconds)
+>>>  
+>>>  --SELECT STATEMENTS FROM APPLICANT TABLE
+>>>  SELECT * FROM applicant LIMIT 3;
++-----------------------------+-----------------------+----------------------+--------------------------+-----------------+--------------------+------------------+----------------+----------------------+--+
+| applicant.applicant_number  | applicant.first_name  | applicant.last_name  | applicant.date_of_birth  | applicant.city  |  applicant.state   | applicant.phone  | applicant.fax  |   applicant.email    |
++-----------------------------+-----------------------+----------------------+--------------------------+-----------------+--------------------+------------------+----------------+----------------------+--+
+| 000001                      | Harry                 | Potter               | 1980-12-12               | Perth           | Western Australia  | 645278453        |                | jones@gmail.com      |
+| 000002                      | Johnny                | Walker               | 1990-02-13               | Geelong         | Victoria           | 63569784         | 63569785       | blunder@hotmail.com  |
+| 000003                      | Mary                  | Poppins              | 1950-01-01               | Melbourne       | Victoria           | 62389541         |                |                      |
++-----------------------------+-----------------------+----------------------+--------------------------+-----------------+--------------------+------------------+----------------+----------------------+--+
+3 rows selected (0.189 seconds)
+>>>  SELECT COUNT(applicant_number) AS num_rows_applicant FROM applicant;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++---------------------+--+
+| num_rows_applicant  |
++---------------------+--+
+| 30                  |
++---------------------+--+
+1 row selected (22.094 seconds)
+>>>  
+>>>  --SELECT STATEMENTS FROM APPLICATION TABLE
+>>>  SELECT * FROM application LIMIT 3;
++---------------------------------+-------------------------------+------------------------------+---------------------------+-------------------+---------------------------+-----------------------------------+-----------------------------------+-------------------------------------+------------------------------+--+
+| application.application_number  | application.applicant_number  | application.position_number  |     application.ename     | application.date  | application.total_skills  | application.total_courses_passed  | application.total_past_employers  | application.total_years_experience  | application.education_level  |
++---------------------------------+-------------------------------+------------------------------+---------------------------+-------------------+---------------------------+-----------------------------------+-----------------------------------+-------------------------------------+------------------------------+--+
+| 001                             | 000001                        | 00000001                     | University of Wollongong  | 2017-12-13        | 3                         | 0                                 | 7                                 | 20                                  | 'primary'                    |
+| 002                             | 000002                        | 00000001                     | Murdoch University        | 2017-12-13        | 5                         | 1                                 | 8                                 | 10                                  | 'preschool'                  |
+| 003                             | 000003                        | 00000002                     | Macquarie University      | 2017-11-14        | 1                         | 2                                 | 7                                 | 15                                  | 'secondary'                  |
++---------------------------------+-------------------------------+------------------------------+---------------------------+-------------------+---------------------------+-----------------------------------+-----------------------------------+-------------------------------------+------------------------------+--+
+3 rows selected (0.141 seconds)
+>>>  SELECT COUNT(application_number) AS num_rows_application FROM application;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-----------------------+--+
+| num_rows_application  |
++-----------------------+--+
+| 19                    |
++-----------------------+--+
+1 row selected (24.843 seconds)
+>>>  
+>>>  --SELECT STATEMENTS FROM EMPLOYER TABLE
+>>>  SELECT * FROM employer LIMIT 3;
++-------------------------------+-----------------+------------------+-----------------+---------------+-------------------+-----------------+--+
+|        employer.ename         |  employer.city  |  employer.state  | employer.phone  | employer.fax  |  employer.email   |  employer.web   |
++-------------------------------+-----------------+------------------+-----------------+---------------+-------------------+-----------------+--+
+| University of Sydney          | Sydney          | New South Wales  | 612345678       |               | admin@uos.edu     | www.uos.edu.au  |
+| University of Western Sydney  | Western Sydney  | New South Wales  | 612345678       |               | muws@uws.edu.au   | www.uws.edu.au  |
+| University of Wollongong      | Wollongong      | New South Wales  | 6124243689      | 6124234569    | admin@uow.edu.au  | www.uow.edu.au  |
++-------------------------------+-----------------+------------------+-----------------+---------------+-------------------+-----------------+--+
+3 rows selected (0.131 seconds)
+>>>  SELECT COUNT(ename) AS num_rows_employer FROM employer;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------------------+--+
+| num_rows_employer  |
++--------------------+--+
+| 15                 |
++--------------------+--+
+1 row selected (23.743 seconds)
+>>>  
+>>>  --SELECT STATEMENTS FROM POSITION TABLE
+>>>  SELECT * FROM position LIMIT 3;
++---------------------------+------------------+------------------+-----------------------+-----------------+-------------------------+-----------------------------------+--+
+| position.position_number  |  position.title  | position.salary  |    position.extras    | position.bonus  | position.specification  |          position.ename           |
++---------------------------+------------------+------------------+-----------------------+-----------------+-------------------------+-----------------------------------+--+
+| 00000001                  | lecturer         | 45000.00         | computer              | NULL            | teaching                | University of New South Wales     |
+| 00000002                  | lecturer         | 450000.00        | mouse pad             | 500000.00       | research                | University of Wollongong          |
+| 00000003                  | senior lecturer  | 50000.00         | a lot of red markers  | NULL            | a lot of hard work      | University of Technology Sydney   |
++---------------------------+------------------+------------------+-----------------------+-----------------+-------------------------+-----------------------------------+--+
+3 rows selected (0.252 seconds)
+>>>  SELECT COUNT(position_number) AS num_rows_position FROM position;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------------------+--+
+| num_rows_position  |
++--------------------+--+
+| 10                 |
++--------------------+--+
+1 row selected (25.203 seconds)
+>>>  
+>>>  !record

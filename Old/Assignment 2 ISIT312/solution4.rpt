@@ -1,0 +1,70 @@
+>>>  
+>>>  CREATE EXTERNAL TABLE AUTHOR( 
+A_ID 		DECIMAL(10), 
+A_FNAME 	VARCHAR(20), 
+A_MNAME		VARCHAR(20), 
+A_LNAME 	VARCHAR(20), 
+A_DOB		DATE, 
+A_BIO		VARCHAR(500) 
+)  ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|' 
+STORED AS TEXTFILE;
+No rows affected (0.1 seconds)
+>>>  
+>>>  LOAD DATA INPATH '/user/bigdata/author.tbl' 
+OVERWRITE INTO TABLE AUTHOR;
+No rows affected (0.278 seconds)
+>>>  
+>>>  CREATE EXTERNAL TABLE ITEM( 
+I_ID	 	DECIMAL(10), 
+I_TITLE	 	VARCHAR(60), 
+I_A_ID	 	DECIMAL(10), 
+I_PUB_DATE	DATE, 
+I_PUBLISHER 	VARCHAR(60), 
+I_SUBJECT 	VARCHAR(60), 
+I_DESC 		VARCHAR(500), 
+I_RELATED1	DECIMAL(10), 
+I_RELATED2      DECIMAL(10), 
+I_RELATED3      DECIMAL(10), 
+I_RELATED4      DECIMAL(10), 
+I_RELATED5      DECIMAL(10), 
+I_THUMBNAIL 	VARCHAR(10), 
+I_IMAGE		VARCHAR(10), 
+I_SRP 		DECIMAL(15,2), 
+I_COST 		DECIMAL(15,2), 
+I_AVAIL 	DATE, 
+I_STOCK		DECIMAL(4), 
+I_ISBN 		CHAR(13), 
+I_PAGE 		DECIMAL(4), 
+I_BACKING 	VARCHAR(15), 
+I_DIMENSIONS 	VARCHAR(25) 
+)  ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '|' 
+STORED AS TEXTFILE;
+No rows affected (0.174 seconds)
+>>>  
+>>>  LOAD DATA INPATH '/user/bigdata/item.tbl' 
+OVERWRITE INTO TABLE ITEM;
+No rows affected (0.289 seconds)
+>>>  
+>>>  SELECT COUNT(*) 
+FROM AUTHOR;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------+--+
+|  c0   |
++-------+--+
+| 2500  |
++-------+--+
+1 row selected (21.435 seconds)
+>>>  
+>>>  SELECT COUNT(*) 
+FROM ITEM;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------+--+
+|   c0   |
++--------+--+
+| 10000  |
++--------+--+
+1 row selected (24.172 seconds)
+>>>  
+>>>  ! record

@@ -1,0 +1,110 @@
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/sbin/start-all.sh
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ export HADOOP_CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath)
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ javac -cp ${HADOOP_CLASSPATH} solution2.java
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ jar cvf solution2.jar solution2*.class
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/bin/hadoop fs -put solution2.jar
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ fs -put sales.txt
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/bin/hadoop jar solution2.jar solution2 45 3 5 sales.txt /user/output/
+21/04/22 12:40:50 INFO client.RMProxy: Connecting to ResourceManager at bigdata-VirtualBox/10.0.2.15:8032
+21/04/22 12:40:51 INFO input.FileInputFormat: Total input paths to process : 1
+21/04/22 12:40:51 INFO mapreduce.JobSubmitter: number of splits:1
+21/04/22 12:40:51 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619057478263_0008
+21/04/22 12:40:51 INFO impl.YarnClientImpl: Submitted application application_1619057478263_0008
+21/04/22 12:40:51 INFO mapreduce.Job: The url to track the job: http://bigdata-VirtualBox:8088/proxy/application_1619057478263_0008/
+21/04/22 12:40:51 INFO mapreduce.Job: Running job: job_1619057478263_0008
+21/04/22 12:40:58 INFO mapreduce.Job: Job job_1619057478263_0008 running in uber mode : false
+21/04/22 12:40:58 INFO mapreduce.Job:  map 0% reduce 0%
+21/04/22 12:41:02 INFO mapreduce.Job:  map 100% reduce 0%
+21/04/22 12:41:03 INFO mapreduce.Job: Job job_1619057478263_0008 completed successfully
+21/04/22 12:41:03 INFO mapreduce.Job: Counters: 30
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=118812
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=209
+		HDFS: Number of bytes written=31
+		HDFS: Number of read operations=5
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=2536
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=2536
+		Total vcore-milliseconds taken by all map tasks=2536
+		Total megabyte-milliseconds taken by all map tasks=2596864
+	Map-Reduce Framework
+		Map input records=12
+		Map output records=4
+		Input split bytes=109
+		Spilled Records=0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=60
+		CPU time spent (ms)=550
+		Physical memory (bytes) snapshot=166174720
+		Virtual memory (bytes) snapshot=1911332864
+		Total committed heap usage (bytes)=92798976
+	File Input Format Counters 
+		Bytes Read=100
+	File Output Format Counters 
+		Bytes Written=31
+21/04/22 12:40:50 INFO client.RMProxy: Connecting to ResourceManager at bigdata-VirtualBox/10.0.2.15:8032
+21/04/22 12:40:51 INFO input.FileInputFormat: Total input paths to process : 1
+21/04/22 12:40:51 INFO mapreduce.JobSubmitter: number of splits:1
+21/04/22 12:40:51 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619057478263_0008
+21/04/22 12:40:51 INFO impl.YarnClientImpl: Submitted application application_1619057478263_0008
+21/04/22 12:40:51 INFO mapreduce.Job: The url to track the job: http://bigdata-VirtualBox:8088/proxy/application_1619057478263_0008/
+21/04/22 12:40:51 INFO mapreduce.Job: Running job: job_1619057478263_0008
+21/04/22 12:40:58 INFO mapreduce.Job: Job job_1619057478263_0008 running in uber mode : false
+21/04/22 12:40:58 INFO mapreduce.Job:  map 0% reduce 0%
+21/04/22 12:41:02 INFO mapreduce.Job:  map 100% reduce 0%
+21/04/22 12:41:03 INFO mapreduce.Job: Job job_1619057478263_0008 completed successfully
+21/04/22 12:41:03 INFO mapreduce.Job: Counters: 30
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=118812
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=209
+		HDFS: Number of bytes written=31
+		HDFS: Number of read operations=5
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=2536
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=2536
+		Total vcore-milliseconds taken by all map tasks=2536
+		Total megabyte-milliseconds taken by all map tasks=2596864
+	Map-Reduce Framework
+		Map input records=12
+		Map output records=4
+		Input split bytes=109
+		Spilled Records=0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=60
+		CPU time spent (ms)=550
+		Physical memory (bytes) snapshot=166174720
+		Virtual memory (bytes) snapshot=1911332864
+		Total committed heap usage (bytes)=92798976
+	File Input Format Counters 
+		Bytes Read=100
+	File Output Format Counters 
+		Bytes Written=31
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/bin/hadoop fs -ls /user/output
+Found 2 items
+-rw-r--r--   1 bigdata supergroup          0 2021-04-22 12:41 /user/output/_SUCCESS
+-rw-r--r--   1 bigdata supergroup         31 2021-04-22 12:41 /user/output/part-m-00000
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/bin/hadoop fs -cat /user/output/part-m-00000
+bolt	45
+washer	3
+nail	5
+bolt	5

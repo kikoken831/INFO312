@@ -1,0 +1,263 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+create 'solution1', 'REPAIR','VEHICLE','OWNER'
+0 row(s) in 2.4860 seconds
+
+Hbase::Table - solution1
+
+put 'solution1','vehicle|PKR856','VEHICLE:registration','PKR856'
+0 row(s) in 0.1290 seconds
+
+put 'solution1','vehicle|PKR856','VEHICLE:make','Toyota'
+0 row(s) in 0.0180 seconds
+
+put 'solution1','vehicle|PKR856','VEHICLE:model','Corolla'
+0 row(s) in 0.0040 seconds
+
+put 'solution1','vehicle|PKR856','OWNER:licence-number','xyz007'
+0 row(s) in 0.0110 seconds
+
+
+put 'solution1','vehicle|AL08UK','VEHICLE:registration','AL08UK'
+0 row(s) in 0.0070 seconds
+
+put 'solution1','vehicle|AL08UK','VEHICLE:make','Toyota'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','vehicle|AL08UK','VEHICLE:model','Yaris'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','vehicle|AL08UK','OWNER:licence-number','abc666'
+0 row(s) in 0.0120 seconds
+
+
+put 'solution1','owner|xyz007','OWNER:licence-number','xyz007'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','owner|xyz007','OWNER:first-name','James'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','owner|xyz007','OWNER:last-name','Bond'
+0 row(s) in 0.0110 seconds
+
+put 'solution1','owner|xyz007','OWNER:phone','007'
+0 row(s) in 0.0060 seconds
+
+
+put 'solution1','owner|abc666','OWNER:licence-number','abc666'
+0 row(s) in 0.0070 seconds
+
+put 'solution1','owner|abc666','OWNER:first-name','Harry Potter'
+0 row(s) in 0.0100 seconds
+
+put 'solution1','owner|abc666','OWNER:last-name','Harry Potter'
+0 row(s) in 0.0100 seconds
+
+put 'solution1','owner|abc666','OWNER:phone','666'
+0 row(s) in 0.0060 seconds
+
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','VEHICLE:registration','AL08UK'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:start-day','01'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:start-month','12'
+0 row(s) in 0.0110 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:start-year','2020'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:end-day','01'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:end-month','12'
+0 row(s) in 0.0030 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:end-year','2020'
+0 row(s) in 0.0030 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:labour-costs','200'
+0 row(s) in 0.0060 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:parts-costs','40'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|12|2020|PKR856','REPAIR:complexity-level','simple'
+0 row(s) in 0.0050 seconds
+
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','VEHICLE:registration','AL08UK'
+0 row(s) in 0.0060 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:start-day','01'
+0 row(s) in 0.0110 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:start-month','10'
+0 row(s) in 0.0070 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:start-year','2020'
+0 row(s) in 0.0060 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:end-day','01'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:end-month','10'
+0 row(s) in 0.0030 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:end-year','2020'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:labour-costs','20'
+0 row(s) in 0.0090 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:parts-costs','4'
+0 row(s) in 0.0110 seconds
+
+put 'solution1','repair|AL08UK|01|10|2020|PKR856','REPAIR:complexity-level','very simple'
+0 row(s) in 0.0050 seconds
+
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','VEHICLE:registration','PKR856'
+0 row(s) in 0.0090 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:start-day','01'
+0 row(s) in 0.0040 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:start-month','11'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:start-year','2020'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:end-day','02'
+0 row(s) in 0.0040 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:end-month','11'
+0 row(s) in 0.0090 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:end-year','2020'
+0 row(s) in 0.0070 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:labour-costs','500'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:parts-costs','4000'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|01|11|2020|PKR856','REPAIR:complexity-level','complex'
+0 row(s) in 0.0100 seconds
+
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','VEHICLE:registration','PKR856'
+0 row(s) in 0.0080 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:start-day','05'
+0 row(s) in 0.0120 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:start-month','05'
+0 row(s) in 0.0300 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:start-year','2020'
+0 row(s) in 0.0150 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:end-day','09'
+0 row(s) in 0.0030 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:end-month','05'
+0 row(s) in 0.0050 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:end-year','2020'
+0 row(s) in 0.0070 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:labour-costs','50000'
+0 row(s) in 0.0030 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:parts-costs','400000'
+0 row(s) in 0.0060 seconds
+
+put 'solution1','repair|AL08UK|05|05|2020|PKR856','REPAIR:complexity-level','very complex'
+0 row(s) in 0.0040 seconds
+
+
+describe 'solution1'
+Table solution1 is ENABLED
+solution1
+COLUMN FAMILIES DESCRIPTION
+{NAME => 'OWNER', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'REPAIR', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'VEHICLE', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+3 row(s) in 0.0270 seconds
+
+
+scan 'solution1'
+ROW  COLUMN+CELL
+ owner|abc666 column=OWNER:first-name, timestamp=1637459681814, value=Harry Potter
+ owner|abc666 column=OWNER:last-name, timestamp=1637459681854, value=Harry Potter
+ owner|abc666 column=OWNER:licence-number, timestamp=1637459681798, value=abc666
+ owner|abc666 column=OWNER:phone, timestamp=1637459681871, value=666
+ owner|xyz007 column=OWNER:first-name, timestamp=1637459681726, value=James
+ owner|xyz007 column=OWNER:last-name, timestamp=1637459681742, value=Bond
+ owner|xyz007 column=OWNER:licence-number, timestamp=1637459681706, value=xyz007
+ owner|xyz007 column=OWNER:phone, timestamp=1637459681781, value=007
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:complexity-level, timestamp=1637459682110, value=very simple
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:end-day, timestamp=1637459682050, value=01
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:end-month, timestamp=1637459682058, value=10
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:end-year, timestamp=1637459682065, value=2020
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:labour-costs, timestamp=1637459682082, value=20
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:parts-costs, timestamp=1637459682099, value=4
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:start-day, timestamp=1637459682022, value=01
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:start-month, timestamp=1637459682034, value=10
+ repair|AL08UK|01|10|2020|PKR856 column=REPAIR:start-year, timestamp=1637459682042, value=2020
+ repair|AL08UK|01|10|2020|PKR856 column=VEHICLE:registration, timestamp=1637459682009, value=AL08UK
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:complexity-level, timestamp=1637459682218, value=complex
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:end-day, timestamp=1637459682160, value=02
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:end-month, timestamp=1637459682178, value=11
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:end-year, timestamp=1637459682190, value=2020
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:labour-costs, timestamp=1637459682196, value=500
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:parts-costs, timestamp=1637459682211, value=4000
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:start-day, timestamp=1637459682132, value=01
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:start-month, timestamp=1637459682142, value=11
+ repair|AL08UK|01|11|2020|PKR856 column=REPAIR:start-year, timestamp=1637459682154, value=2020
+ repair|AL08UK|01|11|2020|PKR856 column=VEHICLE:registration, timestamp=1637459682121, value=PKR856
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:complexity-level, timestamp=1637459681996, value=simple
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:end-day, timestamp=1637459681938, value=01
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:end-month, timestamp=1637459681961, value=12
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:end-year, timestamp=1637459681967, value=2020
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:labour-costs, timestamp=1637459681973, value=200
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:parts-costs, timestamp=1637459681985, value=40
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:start-day, timestamp=1637459681895, value=01
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:start-month, timestamp=1637459681909, value=12
+ repair|AL08UK|01|12|2020|PKR856 column=REPAIR:start-year, timestamp=1637459681926, value=2020
+ repair|AL08UK|01|12|2020|PKR856 column=VEHICLE:registration, timestamp=1637459681882, value=AL08UK
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:complexity-level, timestamp=1637459682453, value=very complex
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:end-day, timestamp=1637459682417, value=09
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:end-month, timestamp=1637459682423, value=05
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:end-year, timestamp=1637459682433, value=2020
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:labour-costs, timestamp=1637459682439, value=50000
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:parts-costs, timestamp=1637459682445, value=400000
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:start-day, timestamp=1637459682275, value=05
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:start-month, timestamp=1637459682356, value=05
+ repair|AL08UK|05|05|2020|PKR856 column=REPAIR:start-year, timestamp=1637459682407, value=2020
+ repair|AL08UK|05|05|2020|PKR856 column=VEHICLE:registration, timestamp=1637459682233, value=PKR856
+ vehicle|AL08UK column=OWNER:licence-number, timestamp=1637459681694, value=abc666
+ vehicle|AL08UK column=VEHICLE:make, timestamp=1637459681669, value=Toyota
+ vehicle|AL08UK column=VEHICLE:model, timestamp=1637459681679, value=Yaris
+ vehicle|AL08UK column=VEHICLE:registration, timestamp=1637459681653, value=AL08UK
+ vehicle|PKR856 column=OWNER:licence-number, timestamp=1637459681636, value=xyz007
+ vehicle|PKR856 column=VEHICLE:make, timestamp=1637459681587, value=Toyota
+ vehicle|PKR856 column=VEHICLE:model, timestamp=1637459681610, value=Corolla
+ vehicle|PKR856 column=VEHICLE:registration, timestamp=1637459681551, value=PKR856
+8 row(s) in 0.0670 seconds
+
+
+disable 'solution1'
+0 row(s) in 2.2720 seconds
+
+
+drop 'solution1'
+0 row(s) in 1.2400 seconds
+

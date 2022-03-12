@@ -1,0 +1,9 @@
+1. Set the first and second args to take in a text document.
+2. Set the third args to output a text document.
+3. In the mapper function, store and sort out both of the input's values in ascending order.
+4. In the reducer function, begin comparing the values from the 2 lists.
+5. If the value of the first list is more than or equals to the value of the second list, store the value.
+6. If the value of the first list is less than the value of the second list, ignore it.
+7. At the end of the function, set and write out the values which are stored from step 5.
+8. Complie the codes using the javac -cp command on the terminal
+9. Create the .jar file using the jar cvf command on the terminal

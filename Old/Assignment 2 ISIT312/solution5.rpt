@@ -1,0 +1,297 @@
+>>>  
+>>>  -- For the order clerks (O_CLERK) Clerk#000000522, Clerk#000000154, find the
+>>>  -- total number of ordered parts per customer (O_CUSTKEY), per supplier
+>>>  -- (L_SUPPKEY), per customer and supplier (O_CUSTKEY, L_SUPPKEY), and the total
+>>>  -- number of ordered parts.
+>>>  SELECT O_CUSTKEY, L_SUPPKEY, COUNT(*) 
+FROM LINEITEM JOIN ORDERS 
+ON LINEITEM.L_ORDERKEY = ORDERS.O_ORDERKEY 
+WHERE O_CLERK IN ('Clerk#000000522', 'Clerk#000000154') 
+GROUP BY O_CUSTKEY, L_SUPPKEY WITH CUBE;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/share/apache-hive-2.1.1-bin/lib/log4j-slf4j-impl-2.4.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/share/hadoop-2.7.3/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+2021-11-20 22:27:59	Starting to launch local task to process map join;	maximum memory = 477626368
+2021-11-20 22:28:00	Dump the side-table for tag: 1 with group count: 2 into file: file:/tmp/hive/hdfs/c8a05483-0abf-4c99-b228-6f0d5cfdfb1a/hive_2021-11-20_22-27-52_880_2496562817506610956-2/-local-10005/HashTable-Stage-2/MapJoin-mapfile01--.hashtable
+2021-11-20 22:28:00	Uploaded 1 File to: file:/tmp/hive/hdfs/c8a05483-0abf-4c99-b228-6f0d5cfdfb1a/hive_2021-11-20_22-27-52_880_2496562817506610956-2/-local-10005/HashTable-Stage-2/MapJoin-mapfile01--.hashtable (310 bytes)
+2021-11-20 22:28:00	End of local task; Time Taken: 1.508 sec.
++------------+------------+-----+--+
+| o_custkey  | l_suppkey  | c2  |
++------------+------------+-----+--+
+| NULL       | NULL       | 4   |
+| 7          | NULL       | 4   |
+| NULL       | 1          | 4   |
+| 7          | 1          | 4   |
++------------+------------+-----+--+
+4 rows selected (34.23 seconds)
+>>>  
+>>>  -- For the parts with the keys (L_PARTKEY) 7, 8, 9 find the largest discount applied
+>>>  -- (L_DISCOUNT) per part key (L_PARTKEY) and per part key and supplier key
+>>>  -- (L_PARTKEY, L_SUPPKEY) and the largest discount applied at all.
+>>>  
+>>>  SELECT L_PARTKEY, L_SUPPKEY, MAX(L_DISCOUNT) 
+FROM LINEITEM 
+WHERE L_PARTKEY IN (7, 8, 9) 
+GROUP BY L_PARTKEY, L_SUPPKEY WITH ROLLUP;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++------------+------------+-------+--+
+| l_partkey  | l_suppkey  |  c2   |
++------------+------------+-------+--+
+| NULL       | NULL       | 0.10  |
+| 7          | NULL       | 0.10  |
+| 7          | 1          | 0.10  |
+| 8          | NULL       | 0.10  |
+| 8          | 1          | 0.10  |
+| 9          | NULL       | 0.10  |
+| 9          | 1          | 0.10  |
++------------+------------+-------+--+
+7 rows selected (24.58 seconds)
+>>>  
+>>>  -- Find the smallest price (L_EXTENDEDPRICE) per order year (O_ORDERDATE), and
+>>>  -- order clerk (O_CLERK).
+>>>  
+>>>  SELECT O_CLERK, substr(O_ORDERDATE,1,4), MIN(L_EXTENDEDPRICE) 
+FROM ORDERS JOIN LINEITEM 
+ON LINEITEM.L_ORDERKEY = ORDERS.O_ORDERKEY 
+GROUP BY O_CLERK, substr(O_ORDERDATE,1,4) 
+GROUPING SETS ( (O_CLERK), (substr(O_ORDERDATE,1,4)) );
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/share/apache-hive-2.1.1-bin/lib/log4j-slf4j-impl-2.4.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/share/hadoop-2.7.3/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+2021-11-20 22:28:55	Starting to launch local task to process map join;	maximum memory = 477626368
+2021-11-20 22:28:56	Dump the side-table for tag: 0 with group count: 150 into file: file:/tmp/hive/hdfs/c8a05483-0abf-4c99-b228-6f0d5cfdfb1a/hive_2021-11-20_22-28-51_744_2279711249266368636-2/-local-10005/HashTable-Stage-2/MapJoin-mapfile10--.hashtable
+2021-11-20 22:28:57	Uploaded 1 File to: file:/tmp/hive/hdfs/c8a05483-0abf-4c99-b228-6f0d5cfdfb1a/hive_2021-11-20_22-28-51_744_2279711249266368636-2/-local-10005/HashTable-Stage-2/MapJoin-mapfile10--.hashtable (6407 bytes)
+2021-11-20 22:28:57	End of local task; Time Taken: 1.409 sec.
++------------------+-------+-----------+--+
+|     o_clerk      |  c1   |    c2     |
++------------------+-------+-----------+--+
+| NULL             | 1992  | 914.01    |
+| NULL             | 1993  | 901.00    |
+| NULL             | 1994  | 911.01    |
+| NULL             | 1995  | 901.00    |
+| NULL             | 1996  | 913.01    |
+| NULL             | 1997  | 914.01    |
+| NULL             | 1998  | 909.00    |
+| Clerk#000000004  | NULL  | 19932.00  |
+| Clerk#000000025  | NULL  | 7232.00   |
+| Clerk#000000036  | NULL  | 11856.13  |
+| Clerk#000000041  | NULL  | 14544.00  |
+| Clerk#000000048  | NULL  | 909.00    |
+| Clerk#000000049  | NULL  | 9180.10   |
+| Clerk#000000058  | NULL  | 33818.37  |
+| Clerk#000000062  | NULL  | 1838.02   |
+| Clerk#000000086  | NULL  | 1818.00   |
+| Clerk#000000088  | NULL  | 8181.00   |
+| Clerk#000000090  | NULL  | 5520.12   |
+| Clerk#000000094  | NULL  | 5412.00   |
+| Clerk#000000103  | NULL  | 5472.06   |
+| Clerk#000000105  | NULL  | 20108.22  |
+| Clerk#000000109  | NULL  | 17252.00  |
+| Clerk#000000124  | NULL  | 27270.00  |
+| Clerk#000000145  | NULL  | 42958.47  |
+| Clerk#000000154  | NULL  | 12698.00  |
+| Clerk#000000155  | NULL  | 7216.00   |
+| Clerk#000000158  | NULL  | 2712.00   |
+| Clerk#000000167  | NULL  | 7288.08   |
+| Clerk#000000177  | NULL  | 2742.03   |
+| Clerk#000000179  | NULL  | 7224.00   |
+| Clerk#000000193  | NULL  | 7328.08   |
+| Clerk#000000196  | NULL  | 16254.00  |
+| Clerk#000000204  | NULL  | 28520.62  |
+| Clerk#000000206  | NULL  | 10010.11  |
+| Clerk#000000209  | NULL  | 20723.00  |
+| Clerk#000000216  | NULL  | 5454.00   |
+| Clerk#000000223  | NULL  | 5502.06   |
+| Clerk#000000230  | NULL  | 9999.00   |
+| Clerk#000000239  | NULL  | 12740.14  |
+| Clerk#000000256  | NULL  | 12782.14  |
+| Clerk#000000259  | NULL  | 6391.07   |
+| Clerk#000000271  | NULL  | 2721.00   |
+| Clerk#000000281  | NULL  | 21137.23  |
+| Clerk#000000289  | NULL  | 18921.00  |
+| Clerk#000000292  | NULL  | 2712.00   |
+| Clerk#000000293  | NULL  | 1816.00   |
+| Clerk#000000294  | NULL  | 20064.22  |
+| Clerk#000000295  | NULL  | 913.01    |
+| Clerk#000000301  | NULL  | 23712.26  |
+| Clerk#000000305  | NULL  | 9933.00   |
+| Clerk#000000310  | NULL  | 18140.00  |
+| Clerk#000000314  | NULL  | 17461.19  |
+| Clerk#000000322  | NULL  | 918.01    |
+| Clerk#000000330  | NULL  | 2712.00   |
+| Clerk#000000331  | NULL  | 13725.15  |
+| Clerk#000000342  | NULL  | 19998.00  |
+| Clerk#000000352  | NULL  | 919.01    |
+| Clerk#000000356  | NULL  | 36280.00  |
+| Clerk#000000358  | NULL  | 38304.42  |
+| Clerk#000000359  | NULL  | 8145.00   |
+| Clerk#000000376  | NULL  | 13515.00  |
+| Clerk#000000378  | NULL  | 1838.02   |
+| Clerk#000000379  | NULL  | 4600.10   |
+| Clerk#000000385  | NULL  | 34618.38  |
+| Clerk#000000392  | NULL  | 13650.15  |
+| Clerk#000000395  | NULL  | 20999.23  |
+| Clerk#000000404  | NULL  | 9110.10   |
+| Clerk#000000405  | NULL  | 914.01    |
+| Clerk#000000409  | NULL  | 4570.05   |
+| Clerk#000000419  | NULL  | 10968.12  |
+| Clerk#000000435  | NULL  | 1840.04   |
+| Clerk#000000440  | NULL  | 2703.00   |
+| Clerk#000000446  | NULL  | 14656.16  |
+| Clerk#000000448  | NULL  | 911.01    |
+| Clerk#000000449  | NULL  | 8208.09   |
+| Clerk#000000456  | NULL  | 35607.39  |
+| Clerk#000000466  | NULL  | 4545.00   |
+| Clerk#000000468  | NULL  | 1828.02   |
+| Clerk#000000470  | NULL  | 4580.05   |
+| Clerk#000000483  | NULL  | 1840.04   |
+| Clerk#000000488  | NULL  | 16470.18  |
+| Clerk#000000489  | NULL  | 27420.30  |
+| Clerk#000000498  | NULL  | 1824.02   |
+| Clerk#000000499  | NULL  | 28086.00  |
+| Clerk#000000504  | NULL  | 25480.28  |
+| Clerk#000000511  | NULL  | 6377.07   |
+| Clerk#000000520  | NULL  | 901.00    |
+| Clerk#000000522  | NULL  | 18140.00  |
+| Clerk#000000532  | NULL  | 28272.31  |
+| Clerk#000000537  | NULL  | 3668.04   |
+| Clerk#000000545  | NULL  | 9100.10   |
+| Clerk#000000547  | NULL  | 3612.00   |
+| Clerk#000000551  | NULL  | 29931.00  |
+| Clerk#000000562  | NULL  | 2703.00   |
+| Clerk#000000573  | NULL  | 11960.26  |
+| Clerk#000000577  | NULL  | 12656.00  |
+| Clerk#000000596  | NULL  | 13605.00  |
+| Clerk#000000597  | NULL  | 3652.04   |
+| Clerk#000000600  | NULL  | 6419.07   |
+| Clerk#000000601  | NULL  | 2760.06   |
++------------------+-------+-----------+--+
+|     o_clerk      |  c1   |    c2     |
++------------------+-------+-----------+--+
+| Clerk#000000604  | NULL  | 40392.44  |
+| Clerk#000000616  | NULL  | 1810.00   |
+| Clerk#000000625  | NULL  | 3676.04   |
+| Clerk#000000628  | NULL  | 2754.03   |
+| Clerk#000000629  | NULL  | 10109.11  |
+| Clerk#000000632  | NULL  | 18921.00  |
+| Clerk#000000642  | NULL  | 3624.00   |
+| Clerk#000000643  | NULL  | 901.00    |
+| Clerk#000000648  | NULL  | 14512.00  |
+| Clerk#000000659  | NULL  | 23894.26  |
+| Clerk#000000661  | NULL  | 19089.00  |
+| Clerk#000000674  | NULL  | 24678.27  |
+| Clerk#000000680  | NULL  | 6405.07   |
+| Clerk#000000700  | NULL  | 9110.10   |
+| Clerk#000000711  | NULL  | 10848.00  |
+| Clerk#000000731  | NULL  | 24786.27  |
+| Clerk#000000735  | NULL  | 1826.02   |
+| Clerk#000000738  | NULL  | 9999.00   |
+| Clerk#000000743  | NULL  | 28272.31  |
+| Clerk#000000756  | NULL  | 1824.02   |
+| Clerk#000000768  | NULL  | 914.01    |
+| Clerk#000000796  | NULL  | 10098.11  |
+| Clerk#000000803  | NULL  | 2709.00   |
+| Clerk#000000804  | NULL  | 11856.13  |
+| Clerk#000000814  | NULL  | 1812.00   |
+| Clerk#000000834  | NULL  | 19998.00  |
+| Clerk#000000841  | NULL  | 2703.00   |
+| Clerk#000000844  | NULL  | 4595.05   |
+| Clerk#000000859  | NULL  | 917.01    |
+| Clerk#000000862  | NULL  | 4585.05   |
+| Clerk#000000880  | NULL  | 34618.38  |
+| Clerk#000000890  | NULL  | 21888.24  |
+| Clerk#000000919  | NULL  | 17423.19  |
+| Clerk#000000923  | NULL  | 17366.19  |
+| Clerk#000000925  | NULL  | 13665.15  |
+| Clerk#000000932  | NULL  | 15419.00  |
+| Clerk#000000934  | NULL  | 10087.11  |
+| Clerk#000000944  | NULL  | 3620.00   |
+| Clerk#000000951  | NULL  | 7256.00   |
+| Clerk#000000955  | NULL  | 1806.00   |
+| Clerk#000000959  | NULL  | 8235.09   |
+| Clerk#000000960  | NULL  | 23894.26  |
+| Clerk#000000969  | NULL  | 911.01    |
+| Clerk#000000973  | NULL  | 4565.05   |
+| Clerk#000000976  | NULL  | 2757.03   |
+| Clerk#000000985  | NULL  | 916.01    |
+| Clerk#000000988  | NULL  | 13515.00  |
+| Clerk#000000992  | NULL  | 8145.00   |
++------------------+-------+-----------+--+
+148 rows selected (26.305 seconds)
+>>>  
+>>>  -- For each part list its key (PS_PARTKEY), all its available quantities (PS_AVAILQTY),
+>>>  -- the smallest available quantity, and the average available quantity. Consider only the
+>>>  -- parts with the keys 5 and 15.
+>>>  
+>>>  SELECT PS_PARTKEY, PS_AVAILQTY, MIN(PS_AVAILQTY) OVER (PARTITION BY PS_PARTKEY), 
+AVG(PS_AVAILQTY) OVER (PARTITION BY PS_PARTKEY) 
+FROM PARTSUPP 
+WHERE PS_PARTKEY IN (5,15);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+-------+------------+--+
+| ps_partkey  | ps_availqty  |  c2   |     c3     |
++-------------+--------------+-------+------------+--+
+| 5           | 6925         | 1329  | 5410.5000  |
+| 5           | 1329         | 1329  | 5410.5000  |
+| 5           | 9653         | 1329  | 5410.5000  |
+| 5           | 3735         | 1329  | 5410.5000  |
+| 15          | 5255         | 3316  | 4738.5000  |
+| 15          | 3316         | 3316  | 4738.5000  |
+| 15          | 3336         | 3316  | 4738.5000  |
+| 15          | 7047         | 3316  | 4738.5000  |
++-------------+--------------+-------+------------+--+
+8 rows selected (24.654 seconds)
+>>>  
+>>>  -- For each part list its key (PS_PARTKEY) and all its available quantities
+>>>  -- (PS_AVAILQTY) sorted in descending order and a rank (position number in an
+>>>  -- ascending order) of each quantity. Consider only the parts with the keys 10 and 20. Use
+>>>  -- an analytic function ROW_NUMBER().
+>>>  
+>>>  SELECT PS_PARTKEY, PS_AVAILQTY, ROW_NUMBER() OVER (PARTITION BY PS_PARTKEY 
+ORDER BY PS_AVAILQTY DESC) 
+FROM PARTSUPP 
+WHERE PS_PARTKEY IN (10,20);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+-----+--+
+| ps_partkey  | ps_availqty  | c2  |
++-------------+--------------+-----+--+
+| 10          | 5691         | 1   |
+| 10          | 3335         | 2   |
+| 10          | 2952         | 3   |
+| 10          | 841          | 4   |
+| 20          | 5905         | 1   |
+| 20          | 4271         | 2   |
+| 20          | 2927         | 3   |
+| 20          | 2723         | 4   |
++-------------+--------------+-----+--+
+8 rows selected (24.306 seconds)
+>>>  
+>>>  -- For each part list its key (PS_PARTKEY), its available quantity, and an average available
+>>>  -- quantity (PS_AVAILQTY) of the current quantity and all previous quantities in the
+>>>  -- ascending order of available quantities. Consider only the parts with the keys 15 and
+>>>  -- 25. Use ROWS UNBOUNDED PRECEDING sub-clause within PARTITION BY
+>>>  -- clause.
+>>>  
+>>>  SELECT PS_PARTKEY, PS_AVAILQTY, AVG(PS_AVAILQTY) OVER (PARTITION BY PS_PARTKEY 
+ORDER BY PS_AVAILQTY 
+ROWS UNBOUNDED PRECEDING) 
+FROM PARTSUPP 
+WHERE PS_PARTKEY IN (15,25);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+------------+--+
+| ps_partkey  | ps_availqty  |     c2     |
++-------------+--------------+------------+--+
+| 15          | 3316         | 3316.0000  |
+| 15          | 3336         | 3326.0000  |
+| 15          | 5255         | 3969.0000  |
+| 15          | 7047         | 4738.5000  |
++-------------+--------------+------------+--+
+4 rows selected (24.314 seconds)
+>>>  
+>>>  ! record

@@ -1,0 +1,61 @@
+>>>  
+>>>  CREATE TABLE DUAL(a char(1));
+No rows affected (0.113 seconds)
+>>>  INSERT INTO DUAL VALUES('1');
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (14.738 seconds)
+>>>  
+>>>  CREATE TABLE EVALUATIONS( 
+student_number	int, 
+subjects        map<string,int> );
+No rows affected (0.185 seconds)
+>>>  
+>>>  INSERT INTO EVALUATIONS 
+SELECT 1111, map('CSIT111',1,'CSIT121',23,'CSIT101',50,'CSIT235',99,'ISIT312',2) 
+FROM DUAL;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (19.123 seconds)
+>>>  
+>>>  INSERT INTO EVALUATIONS 
+SELECT 1112, map('CSIT101',56,'CSIT111',78,'CSIT115',10,'ISIT312',05) 
+FROM DUAL;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (18.722 seconds)
+>>>  
+>>>  INSERT INTO EVALUATIONS 
+SELECT 1113, map('CSIT121',76,'CSIT235',87,'ISIT312',49) 
+FROM DUAL;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (20.93 seconds)
+>>>  
+>>>  INSERT INTO EVALUATIONS 
+SELECT 1114, map('CSIT111',50,'ISIT312',45) 
+FROM DUAL;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (22.336 seconds)
+>>>  
+>>>  INSERT INTO EVALUATIONS 
+SELECT 1115, map('ISIT115',67,'CSCI235',45,'CSIT127',56) 
+FROM DUAL;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (22.894 seconds)
+>>>  
+>>>  SELECT * 
+FROM EVALUATIONS;
++-----------------------------+-------------------------------------------------------------------+--+
+| evaluations.student_number  |                       evaluations.subjects                        |
++-----------------------------+-------------------------------------------------------------------+--+
+| 1111                        | {"CSIT111":1,"CSIT121":23,"CSIT101":50,"CSIT235":99,"ISIT312":2}  |
+| 1112                        | {"CSIT101":56,"CSIT111":78,"CSIT115":10,"ISIT312":5}              |
+| 1113                        | {"CSIT121":76,"CSIT235":87,"ISIT312":49}                          |
+| 1114                        | {"CSIT111":50,"ISIT312":45}                                       |
+| 1115                        | {"ISIT115":67,"CSCI235":45,"CSIT127":56}                          |
++-----------------------------+-------------------------------------------------------------------+--+
+5 rows selected (0.224 seconds)
+>>>  
+>>>  DROP TABLE EVALUATIONS;
+No rows affected (0.171 seconds)
+>>>  DROP TABLE DUAL;
+No rows affected (0.229 seconds)
+>>>  
+>>>  ! record

@@ -1,0 +1,85 @@
+/* Student Name: 	Lee Yu Xian */
+/* Student Number: 	7233164 */
+
+scala> val task1 = spark.sparkContext.textFile("/user/bigdata/sales.txt").
+     | map(_.split(" ")).
+     | map(attributes => Sales(attributes(0), attributes(1).trim.toInt)).toDS()
+task1: org.apache.spark.sql.Dataset[Sales] = [name: string, amount: bigint]
+
+scala> task1.show()
++-----+------+
+| name|amount|
++-----+------+
+| bolt|    45|
+| bolt|     5|
+|drill|     1|
+|drill|     1|
+|screw|     1|
+|screw|     2|
+|screw|     3|
++-----+------+
+
+
+scala> task1.groupBy($"name").sum("amount").show(false)
++-----+-----------+
+|name |sum(amount)|
++-----+-----------+
+|bolt |50         |
+|drill|2          |
+|screw|6          |
++-----+-----------+
+
+
+scala> 
+
+scala> case class Sales(name: String, amount: Long)
+defined class Sales
+
+scala> val task2 = Seq(Sales("bolt", 45), Sales("bolt", 5), Sales("drill", 1), Sales("drill", 1), Sales("screw", 1), Sales("screw", 2), Sales("screw", 3)).toDS()
+task2: org.apache.spark.sql.Dataset[Sales] = [name: string, amount: bigint]
+
+scala> task2.show()
++-----+------+
+| name|amount|
++-----+------+
+| bolt|    45|
+| bolt|     5|
+|drill|     1|
+|drill|     1|
+|screw|     1|
+|screw|     2|
+|screw|     3|
++-----+------+
+
+
+scala> task2.groupBy($"name").sum("amount").show(false)
++-----+-----------+
+|name |sum(amount)|
++-----+-----------+
+|bolt |50         |
+|drill|2          |
+|screw|6          |
++-----+-----------+
+
+
+scala> 
+
+scala> val task3 = spark.sparkContext.textFile("/user/bigdata/sales.txt").
+     | map(_.split(" ")).
+     | map(attributes => Sales(attributes(0), attributes(1).trim.toInt)).toDF()
+task3: org.apache.spark.sql.DataFrame = [name: string, amount: bigint]
+
+scala> task3.createOrReplaceTempView("sales")
+
+scala> val sqltask3 = spark.sql("select name, sum(amount) from sales group by name")
+sqltask3: org.apache.spark.sql.DataFrame = [name: string, sum(amount): bigint]
+
+scala> sqltask3.show()
++-----+-----------+
+| name|sum(amount)|
++-----+-----------+
+| bolt|         50|
+|drill|          2|
+|screw|          6|
++-----+-----------+
+

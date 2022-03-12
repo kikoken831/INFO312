@@ -1,0 +1,35 @@
+STUDENT NAME: 	LEE YU XIAN
+STUDENT NUMBER:	7322164
+
+bigdata@bigdata-VirtualBox:~/Desktop$ $HADOOP_HOME/bin/hadoop fs -put /home/bigdata/Desktop/task1_1.txt
+bigdata@bigdata-VirtualBox:~/Desktop$ $HADOOP_HOME/bin/hadoop fs -put /home/bigdata/Desktop/task1_2.txt
+bigdata@bigdata-VirtualBox:~/Desktop$ $HADOOP_HOME/bin/hadoop fs -ls
+Found 5 items
+drwxr-xr-x   - bigdata supergroup          0 2017-07-03 01:33 .sparkStaging
+drwxr-xr-x   - bigdata supergroup          0 2021-10-07 23:47 myfolder
+-rw-r--r--   1 bigdata supergroup    4538523 2021-10-08 00:34 shakespeare.txt
+-rw-r--r--   1 bigdata supergroup        101 2021-10-13 00:46 task1_1.txt
+-rw-r--r--   1 bigdata supergroup        104 2021-10-13 00:46 task1_2.txt
+bigdata@bigdata-VirtualBox:~/Desktop$ javac -cp $HADOOP_CLASSPATH solution1.javabigdata@bigdata-VirtualBox:~/Desktop$ jar cvf solution1.jar solution1*.classadded manifest
+adding: solution1.class(in = 2096) (out= 1042)(deflated 50%)
+bigdata@bigdata-VirtualBox:~/Desktop$ $HADOOP_HOME/bin/hadoop jar /home/bigdata/Desktop/solution1.jar solution1 task1_1.txt task1_2.txt task1output.txt
+bigdata@bigdata-VirtualBox:~/Desktop$ $HADOOP_HOME/bin/hadoop fs -ls
+Found 6 items
+drwxr-xr-x   - bigdata supergroup          0 2017-07-03 01:33 .sparkStaging
+drwxr-xr-x   - bigdata supergroup          0 2021-10-07 23:47 myfolder
+-rw-r--r--   1 bigdata supergroup    4538523 2021-10-08 00:34 shakespeare.txt
+-rw-r--r--   1 bigdata supergroup        101 2021-10-13 00:46 task1_1.txt
+-rw-r--r--   1 bigdata supergroup        104 2021-10-13 00:46 task1_2.txt
+-rw-r--r--   1 bigdata supergroup        104 2021-10-13 00:47 task1output.txt
+bigdata@bigdata-VirtualBox:~/Desktop$ $HADOOP_HOME/bin/hadoop fs -cat task1output.txt
+START OF FIRST FILE =================
+
+CONTENTS OF FIRST FILE
+
+END OF FIRST FILE ===================
+START OF SECOND FILE =================
+
+CONTENTS OF SECOND FILE
+
+END OF SECOND FILE ===================
+bigdata@bigdata-VirtualBox:~/Desktop$ 

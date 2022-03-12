@@ -1,0 +1,51 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+get 'task2','position|312',{COLUMN=>'POSITION',VERSIONS=>1}
+COLUMN  CELL
+ POSITION:position-number timestamp=1637469740890, value=312
+ POSITION:salary timestamp=1637469740966, value=600000
+ POSITION:title timestamp=1637469740920, value=Big Data Manager
+3 row(s) in 0.3680 seconds
+
+
+scan 'task2',{COLUMNS=>['POSITION','APPLICANT','APPLICATION'],FILTER =>"SingleColumnValueFilter('POSITION','position-number',=, 'binary:312') AND SingleColumnValueFilter('APPLICANT','number',=, 'binary:007')",VERSIONS=>1}
+ROW  COLUMN+CELL
+ applicant|007 column=APPLICANT:date-of-birth, timestamp=1637469741172, value=01-01-1960
+ applicant|007 column=APPLICANT:full-name, timestamp=1637469741125, value=James Bond
+ applicant|007 column=APPLICANT:number, timestamp=1637469741102, value=007
+ application|007|312|SIM|01 column=APPLICANT:number, timestamp=1637469741460, value=007
+ application|007|312|SIM|01 column=APPLICATION:application-number, timestamp=1637469741333, value=01
+ application|007|312|SIM|01 column=APPLICATION:education-level, timestamp=1637469741394, value=high
+ application|007|312|SIM|01 column=APPLICATION:total-skills, timestamp=1637469741363, value=5
+ application|007|312|SIM|01 column=POSITION:position-number, timestamp=1637469741413, value=312
+ position|312 column=POSITION:position-number, timestamp=1637469740890, value=312
+ position|312 column=POSITION:salary, timestamp=1637469740966, value=600000
+ position|312 column=POSITION:title, timestamp=1637469740920, value=Big Data Manager
+3 row(s) in 0.0710 seconds
+
+
+alter 'task2' , 'delete' => 'EMPLOYER'
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 3.2750 seconds
+
+
+put 'task2','position|312','POSITION:total','2'
+0 row(s) in 0.0880 seconds
+
+put 'task2','position|313','POSITION:total','1'
+0 row(s) in 0.0180 seconds
+
+
+alter 'task2' , NAME => 'APPLICANT' , VERSIONS=>5
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 1.9380 seconds
+
+
+

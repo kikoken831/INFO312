@@ -1,0 +1,81 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+# Student Name: Liang Leran Jenny
+# Student ID: 7063167
+# Assignment 3 Task 1
+
+# Create table
+create 'APPLICATION_RECORDS', 'APPLICANT', 'EMPLOYER', 'POSITION', 'APPLICATION'
+0 row(s) in 2.4800 seconds
+
+Hbase::Table - APPLICATION_RECORDS
+
+# Insert values
+put 'APPLICATION_RECORDS', 'applicant:00001', 'APPLICANT:applicant-number', '00001'
+0 row(s) in 0.1600 seconds
+
+put 'APPLICATION_RECORDS', 'applicant:00001', 'APPLICANT:full-name', 'Jenny Liang'
+0 row(s) in 0.0100 seconds
+
+put 'APPLICATION_RECORDS', 'applicant:00001', 'APPLICANT:date-of-birth', '19/01/1996'
+0 row(s) in 0.0040 seconds
+
+
+put 'APPLICATION_RECORDS', 'applicant:00002', 'APPLICANT:applicant-number', '00002'
+0 row(s) in 0.0060 seconds
+
+put 'APPLICATION_RECORDS', 'applicant:00002', 'APPLICANT:full-name', 'Samuel Lum'
+0 row(s) in 0.0030 seconds
+
+put 'APPLICATION_RECORDS', 'applicant:00002', 'APPLICANT:date-of-birth', '29/09/1999'
+0 row(s) in 0.0030 seconds
+
+
+put 'APPLICATION_RECORDS', 'employer:0001', 'EMPLOYER:ename', 'ST Engineering'
+0 row(s) in 0.0030 seconds
+
+put 'APPLICATION_RECORDS', 'employer:0001', 'EMPLOYER:phone', '65657123'
+0 row(s) in 0.0110 seconds
+
+
+put 'APPLICATION_RECORDS', 'position:001', 'POSITION:position-number', '001'
+0 row(s) in 0.0120 seconds
+
+put 'APPLICATION_RECORDS', 'position:001', 'POSITION:title', 'Software Engineer'
+0 row(s) in 0.0040 seconds
+
+put 'APPLICATION_RECORDS', 'position:001', 'POSITION:salary', '4500'
+0 row(s) in 0.0040 seconds
+
+
+put 'APPLICATION_RECORDS', 'position:002', 'POSITION:position-number', '002'
+0 row(s) in 0.0070 seconds
+
+put 'APPLICATION_RECORDS', 'position:002', 'POSITION:title', 'Assistant Engineer'
+0 row(s) in 0.0050 seconds
+
+put 'APPLICATION_RECORDS', 'position:002', 'POSITION:salary', '2800'
+0 row(s) in 0.0020 seconds
+
+
+put 'APPLICATION_RECORDS', 'application:00001|0001|001', 'APPLICATION:application-number', '000001'
+0 row(s) in 0.0030 seconds
+
+put 'APPLICATION_RECORDS', 'application:00001|0001|001', 'APPLICATION:total-skills', '3'
+0 row(s) in 0.0040 seconds
+
+put 'APPLICATION_RECORDS', 'application:00001|0001|001', 'APPLICATION:education-level', 'Graduate'
+0 row(s) in 0.0030 seconds
+
+
+put 'APPLICATION_RECORDS', 'application:00002|0001|002', 'APPLICATION:application-number', '000002'
+0 row(s) in 0.0030 seconds
+
+put 'APPLICATION_RECORDS', 'application:00002|0001|002', 'APPLICATION:total-skills', '2'
+0 row(s) in 0.0020 seconds
+
+put 'APPLICATION_RECORDS', 'application:00002|0001|002', 'APPLICATION:education-level', 'Diploma'
+0 row(s) in 0.0030 seconds
+

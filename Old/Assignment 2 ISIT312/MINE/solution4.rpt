@@ -1,0 +1,111 @@
+>>>  
+>>>  -- Student Name: Lee Yu Xian
+>>>  -- Student Number: 7233164
+>>>  
+>>>  -- Create author table
+>>>  create external table author( 
+A_ID 		DECIMAL(10), 
+A_FNAME 	VARCHAR(20), 
+A_MNAME		VARCHAR(20), 
+A_LNAME 	VARCHAR(20), 
+A_DOB		DATE, 
+A_BIO		VARCHAR(500) 
+) 
+row format delimited fields terminated by '|' 
+stored as textfile location '/user/bigdata/author';
+No rows affected (0.035 seconds)
+>>>  
+>>>  -- Create item table
+>>>  create external table item( 
+I_ID	 	DECIMAL(10), 
+I_TITLE	 	VARCHAR(60), 
+I_A_ID	 	DECIMAL(10), 
+I_PUB_DATE	DATE, 
+I_PUBLISHER 	VARCHAR(60), 
+I_SUBJECT 	VARCHAR(60), 
+I_DESC 		VARCHAR(500), 
+I_RELATED1	DECIMAL(10), 
+I_RELATED2      DECIMAL(10), 
+I_RELATED3      DECIMAL(10), 
+I_RELATED4      DECIMAL(10), 
+I_RELATED5      DECIMAL(10), 
+I_THUMBNAIL 	VARCHAR(10), 
+I_IMAGE		VARCHAR(10), 
+I_SRP 		DECIMAL(15,2), 
+I_COST 		DECIMAL(15,2), 
+I_AVAIL 	DATE, 
+I_STOCK		DECIMAL(4), 
+I_ISBN 		CHAR(13), 
+I_PAGE 		DECIMAL(4), 
+I_BACKING 	VARCHAR(15), 
+I_DIMENSIONS 	VARCHAR(25) 
+) 
+row format delimited fields terminated by '|' 
+stored as textfile location '/user/bigdata/item';
+No rows affected (0.045 seconds)
+>>>  
+>>>  -- Total number of rows in the author table
+>>>  select count(*) from author;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------+--+
+|  c0   |
++-------+--+
+| 2500  |
++-------+--+
+1 row selected (12.928 seconds)
+>>>  
+>>>  -- Total number of rows in the item table
+>>>  select count(*) from item;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------+--+
+|   c0   |
++--------+--+
+| 10000  |
++--------+--+
+1 row selected (17.725 seconds)
+>>>  
+>>>  -- Total number of rows in both tables
+>>>  with totrows as 
+(SELECT COUNT(*) as rn 
+FROM author 
+UNION ALL 
+SELECT COUNT(*) 
+FROM item) 
+select sum(rn) from totrows;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++--------+--+
+|   c0   |
++--------+--+
+| 12500  |
++--------+--+
+1 row selected (54.523 seconds)
+>>>  
+>>>  -- First three rows from author table
+>>>  select * from author limit 3;
++--------------+-----------------+---------------------+-----------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--+
+| author.a_id  | author.a_fname  |   author.a_mname    |    author.a_lname     | author.a_dob  |                                                                                                                                                                                                                                  author.a_bio                                                                                                                                                                                                                                  |
++--------------+-----------------+---------------------+-----------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--+
+| 1            | 5P040           | nS0c2GP0n           | BABABABABABAOGl7xF    | NULL          | Minutes search in the young, labour years. Individuals will have to come. Trousers continue in the following changes: Actions at the big, young aspects shall sleep clear, african ideas. Great, large pupils do pick. Necessary eyes to the large, small years carry long, external circumstances. Questions might carry. Lovely, actual talks might rest customers: Social, other players identify. Systems could play. Standards ride. Overseas, federal goods interfere.   |
+| 2            | cy8o            | ZkcR139U86m9K5642   | BABABABABABAALwH      | NULL          | Duties give between the methods. High, other children in the numbers realise modern, good years. Mountains talk teachers. New, hot studies forget to the members. Present, good programmes will take. Soviet, parliamentary dogs avoid. Sales to the only, joint persons ought to lead various, great lips. Areas wear about. Names could get with the unable, big quantities. Common, genuine shows between the mutual, prime houses miss between the                         |
+| 3            | dC5             | Imnd0eY3A2712S6F9d  | BABABABABABARI        | NULL          | Big, black employers could tell. Ways exist. Available, regional waters in the limited, personal matters will have to make in the eyes. Ways should move                                                                                                                                                                                                                                                                                                                       |
++--------------+-----------------+---------------------+-----------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--+
+3 rows selected (0.056 seconds)
+>>>  
+>>>  -- First three rows from item table
+>>>  select * from item limit 3;
++------------+---------------------------------------------------------+--------------+------------------+-------------------------------------------+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------------+------------------+------------------+------------------+-------------------+---------------+-------------+--------------+---------------+---------------+----------------+--------------+-----------------+--------------------+--+
+| item.i_id  |                      item.i_title                       | item.i_a_id  | item.i_pub_date  |             item.i_publisher              | item.i_subject  |                                                                                                                                                                                                      item.i_desc                                                                                                                                                                                                      | item.i_related1  | item.i_related2  | item.i_related3  | item.i_related4  | item.i_related5  | item.i_thumbnail  | item.i_image  | item.i_srp  | item.i_cost  | item.i_avail  | item.i_stock  |  item.i_isbn   | item.i_page  | item.i_backing  | item.i_dimensions  |
++------------+---------------------------------------------------------+--------------+------------------+-------------------------------------------+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------------+------------------+------------------+------------------+-------------------+---------------+-------------+--------------+---------------+---------------+----------------+--------------+-----------------+--------------------+--+
+| 1          | Open, BABABABABABAOG wrong                              | 1            | NULL             | Common occasions will have to             | ROMANCE         | General reasons during the long, living subjects might take with the goods. Cells continue. Small, new schools shift. Nations to the offences might show by the subsequent, simple homes. Important, elderly years encourage. Dogs from the types shall have to pull organic, top sources. Materials go to the big, french friends. Social, nuclear examples should ask. Patients strengthen for the other, northern  | 9272             | 9550             | 707              | 2253             | 5398             | c:\               | c:\           | 1727.42     | 821.00       | NULL          | 22            | JQyQ5MIc91ANC  | 4273         | PAPERBACK       | 8.49x69.77x55.64   |
+| 2          | Children with BABABABABABAAL the other, necessary       | 2            | NULL             | Activities may forget. Blue birds need?   | COOKING         | Similar, southern goods know to the centres. Round, domestic months must improve probably on the thanks. Attitudes shall have to land. Full, russian walls could control. Useful, economic hundreds make at the nuclear, great colours. Cultural, immediate ministers give. Other, ordinary pictures make. Likely, great days satisfy before the wrong, small companies. Economic, specific women lose. Other,        | 8661             | 5159             | 7081             | 5701             | 3667             | c:\               | c:\           | 8893.32     | 3909.30      | NULL          | 25            | dFSe5WCeX3GJz  | 8473         | AUDIO           | 93.76x84.33x1.71   |
+| 3          | Years will break BABABABABABARI pleasant, free terms--  | 3            | NULL             | Simple, clear feet represent. Functions   | SCIENCE-NATURE  | Hands on the british names come christian, other minutes. Members do make; Large others can appear. Bodies suffer. Wages should know by the obvious minutes. Policies ensure on the communities. Objects can cost in the interesting, early years. Active, inner points meet. Departments in the particular, human years might evaluate such as the weeks. Growing, left theories to the legal, old                   | 4546             | 7449             | 7146             | 9690             | 69               | c:\               | c:\           | 8345.49     | 3981.86      | NULL          | 15            | hIs86uiW15pA6  | 9255         | PAPERBACK       | 45.30x52.68x72.80  |
++------------+---------------------------------------------------------+--------------+------------------+-------------------------------------------+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------+------------------+------------------+------------------+------------------+-------------------+---------------+-------------+--------------+---------------+---------------+----------------+--------------+-----------------+--------------------+--+
+3 rows selected (0.042 seconds)
+>>>  
+>>>  -- Spring cleaning
+>>>  drop table author;
+No rows affected (0.035 seconds)
+>>>  drop table item;
+No rows affected (0.038 seconds)
+>>>  
+>>>  !record

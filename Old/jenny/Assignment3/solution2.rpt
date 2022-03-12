@@ -1,0 +1,101 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+# Student Name: Liang Leran Jenny
+# Student ID: 7063167
+# Assignment 3 Task 2
+
+# PART 1
+alter 'task2', {NAME=>'SUBJECT', VERSIONS=>'2'}
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 3.4020 seconds
+
+put 'task2','subject|312','SUBJECT:code','312'
+0 row(s) in 0.1090 seconds
+
+put 'task2','subject|312','SUBJECT:title','Big Data Management'
+0 row(s) in 0.0150 seconds
+
+put 'task2','subject|312','SUBJECT:credits','6'
+0 row(s) in 0.0080 seconds
+
+get 'task2', 'subject|312', {COLUMN=>'SUBJECT:code', VERSIONS=>2}
+COLUMN  CELL
+ SUBJECT:code timestamp=1621963871722, value=312
+ SUBJECT:code timestamp=1621963291329, value=312
+2 row(s) in 0.0360 seconds
+
+get 'task2', 'subject|312', {COLUMN=>'SUBJECT:title', VERSIONS=>2}
+COLUMN  CELL
+ SUBJECT:title timestamp=1621963871795, value=Big Data Management
+ SUBJECT:title timestamp=1621963291341, value=Big Data
+2 row(s) in 0.0210 seconds
+
+get 'task2', 'subject|312', {COLUMN=>'SUBJECT:credits', VERSIONS=>2}
+COLUMN  CELL
+ SUBJECT:credits timestamp=1621963871839, value=6
+ SUBJECT:credits timestamp=1621963291370, value=6
+2 row(s) in 0.0050 seconds
+
+
+# PART 2
+get 'task2', 'submission|007|312|assignment|1', {COLUMN=>'SUBMISSION:sdate', VERSIONS=>1}
+COLUMN  CELL
+ SUBMISSION:sdate timestamp=1621963291460, value=01-APR-2019
+1 row(s) in 0.0200 seconds
+
+get 'task2', 'submission|007|312|assignment|1', {COLUMN=>'SUBMISSION:esignature', VERSIONS=>1}
+COLUMN  CELL
+ SUBMISSION:esignature timestamp=1621963291468, value=jb
+1 row(s) in 0.0170 seconds
+
+get 'task2', 'submission|007|312|assignment|1', {COLUMN=>'SUBMISSION:totalfiles', VERSIONS=>1}
+COLUMN  CELL
+ SUBMISSION:totalfiles timestamp=1621963291484, value=2
+1 row(s) in 0.0100 seconds
+
+get 'task2', 'submission|007|312|assignment|1', {COLUMN=>'SUBMISSION:dayslate', VERSIONS=>1}
+COLUMN  CELL
+ SUBMISSION:dayslate timestamp=1621963291495, value=0
+1 row(s) in 0.0070 seconds
+
+get 'task2', 'submission|007|312|assignment|1', {COLUMN=>'SUBMISSION:tnumber', VERSIONS=>1}
+COLUMN  CELL
+ SUBMISSION:tnumber timestamp=1621963291538, value=1
+1 row(s) in 0.0230 seconds
+
+get 'task2', 'submission|007|312|assignment|1', {COLUMN=>'SUBMISSION:type', VERSIONS=>1}
+COLUMN  CELL
+ SUBMISSION:type timestamp=1621963291520, value=assignment
+1 row(s) in 0.0050 seconds
+
+
+# PART 3
+alter 'task2', {NAME=>'FILES', METHOD=>'delete'}
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 2.2080 seconds
+
+
+# PART 4
+alter 'task2', {NAME=>'ENROLMENT', VERSIONS=>'2'}
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 2.9930 seconds
+
+
+# PART 5
+alter 'task2', {NAME=>'ENROLMENT', VERSIONS=>'3'}
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 3.0240 seconds
+

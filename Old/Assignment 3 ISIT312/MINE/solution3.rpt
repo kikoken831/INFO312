@@ -1,0 +1,269 @@
+/* Student Name: 	Lee Yu Xian */
+/* Student Number: 	7233164 */
+
+/* ===================================== PART 1 ===================================== */
+grunt> accounts = load '/user/bigdata/account.tbl' using PigStorage('|') as
+>> (account_number:long,bank_name:chararray,balance:float,account_type:chararray);
+2021-11-21 04:34:44,378 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+grunt> 
+grunt> banks = load '/user/bigdata/bank.tbl' using PigStorage('|') as
+>> (bank_name:chararray,hq_country:chararray,hq_city:chararray,hq_street:chararray,hq_building_number:int,website:chararray,email:chararray,bank_type:chararray);
+2021-11-21 04:34:44,449 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+grunt> 
+grunt> transactions = load '/user/bigdata/transaction.tbl' using PigStorage('|') as
+>> (account_number:long,bank_name:chararray,date_time:chararray,amount:float,transaction_type:chararray);
+2021-11-21 04:34:44,509 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+
+/* ===================================== PART 2 ===================================== */
+grunt> construction = filter banks by bank_type == 'construction';
+grunt> accountnum = join construction by bank_name, accounts by bank_name;
+grunt> results = foreach accountnum generate account_number;
+grunt> dump results;
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.7.3	0.16.0	bigdata	2021-11-21 04:35:41	2021-11-21 04:35:58	HASH_JOIN,FILTER
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Maps	Reduces	MaxMapTime	MinMapTime	AvgMapTime	MedianMapTime	MaxReduceTime	MinReduceTime	AvgReduceTime	MedianReducetime	Alias	Feature	Outputs
+job_1637235459803_0032	2	1	3	3	3	3	1	1	1	1	accountnum,accounts,banks,construction,results	HASH_JOIN	hdfs://localhost:8020/tmp/temp1730544802/tmp-1386084502,
+
+Input(s):
+Successfully read 53 records from: "/user/bigdata/account.tbl"
+Successfully read 21 records from: "/user/bigdata/bank.tbl"
+
+Output(s):
+Successfully stored 5 records (49 bytes) in: "hdfs://localhost:8020/tmp/temp1730544802/tmp-1386084502"
+
+Counters:
+Total records written : 5
+Total bytes written : 49
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_1637235459803_0032
+
+ Total input paths to process : 1
+(123456788)
+(593456725)
+(313345681)
+(5122456739)
+(123456789)
+
+/* ===================================== PART 3 ===================================== */
+grunt> joinleftouter = join banks by bank_name left outer, accounts by bank_name;
+grunt> bankswithoutacc = filter joinleftouter by account_number is null;
+grunt> results = foreach bankswithoutacc generate banks::bank_name;
+grunt> dump results;
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.7.3	0.16.0	bigdata	2021-11-21 04:37:04	2021-11-21 04:37:21	HASH_JOIN,FILTER
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Maps	Reduces	MaxMapTime	MinMapTime	AvgMapTime	MedianMapTime	MaxReduceTime	MinReduceTime	AvgReduceTime	MedianReducetime	Alias	Feature	Outputs
+job_1637235459803_0033	2	1	2	2	2	2	1	1	1	1	accounts,banks,bankswithoutacc,joinleftouter,results	HASH_JOIN	hdfs://localhost:8020/tmp/temp1730544802/tmp2080561425,
+
+Input(s):
+Successfully read 21 records from: "/user/bigdata/bank.tbl"
+Successfully read 53 records from: "/user/bigdata/account.tbl"
+
+Output(s):
+Successfully stored 2 records (76 bytes) in: "hdfs://localhost:8020/tmp/temp1730544802/tmp2080561425"
+
+Counters:
+Total records written : 2
+Total bytes written : 76
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_1637235459803_0033
+
+ Total input paths to process : 1
+(National American Savings Bank)
+(National China Construction Bank)
+
+/* ===================================== PART 4 ===================================== */
+grunt> japan = filter banks by hq_country == 'Japan';
+grunt> jointoacc = join japan by bank_name, accounts by bank_name;
+grunt> groupedjointoacc = group jointoacc all;
+grunt> results = foreach groupedjointoacc generate COUNT(jointoacc);
+grunt> dump results;
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.7.3	0.16.0	bigdata	2021-11-21 04:29:41	2021-11-21 04:30:18	HASH_JOIN,GROUP_BY,FILTER
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Maps	Reduces	MaxMapTime	MinMapTime	AvgMapTime	MedianMapTime	MaxReduceTime	MinReduceTime	AvgReduceTime	MedianReducetime	Alias	Feature	Outputs
+job_1637235459803_0029	2	1	2	2	2	2	2	2	2	2	accounts,banks,japan,jointoacc	HASH_JOIN	
+job_1637235459803_0030	1	1	1	1	1	1	1	1	1	1	groupedjointoacc,results	GROUP_BY,COMBINER	hdfs://localhost:8020/tmp/temp746369197/tmp-28493755,
+
+Input(s):
+Successfully read 53 records from: "/user/bigdata/account.tbl"
+Successfully read 21 records from: "/user/bigdata/bank.tbl"
+
+Output(s):
+Successfully stored 1 records (6 bytes) in: "hdfs://localhost:8020/tmp/temp746369197/tmp-28493755"
+
+Counters:
+Total records written : 1
+Total bytes written : 6
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_1637235459803_0029	->	job_1637235459803_0030,
+job_1637235459803_0030
+
+ Total input paths to process : 1
+(7)
+
+/* ===================================== PART 5 ===================================== */
+grunt> alltransactions = foreach transactions generate account_number;
+grunt> results = DISTINCT alltransactions;
+grunt> dump results;
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.7.3	0.16.0	bigdata	2021-11-21 04:30:18	2021-11-21 04:30:40	DISTINCT
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Maps	Reduces	MaxMapTime	MinMapTime	AvgMapTime	MedianMapTime	MaxReduceTime	MinReduceTime	AvgReduceTime	MedianReducetime	Alias	Feature	Outputs
+job_1637235459803_0031	1	1	1	1	1	1	1	1	1	1	alltransactions,transactions	DISTINCT	hdfs://localhost:8020/tmp/temp746369197/tmp2030042096,
+
+Input(s):
+Successfully read 88 records (6725 bytes) from: "/user/bigdata/transaction.tbl"
+
+Output(s):
+Successfully stored 42 records (466 bytes) in: "hdfs://localhost:8020/tmp/temp746369197/tmp2030042096"
+
+Counters:
+Total records written : 42
+Total bytes written : 466
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_1637235459803_0031
+
+ Total input paths to process : 1
+(2223456770)
+(2523456752)
+(2523456757)
+(3123456712)
+(3123456720)
+(3323456721)
+(3623456728)
+(4123456720)
+(4123456730)
+(4123456788)
+(5023456739)
+(5122456739)
+(5123456725)
+(6123456705)
+(6223456740)
+(7123456719)
+(7223456719)
+(7823456713)
+(8123456781)
+(9123456689)
+(9123456717)
+(9123456786)
+(123356784)
+(123456710)
+(123456730)
+(123456779)
+(123456789)
+(153456782)
+(313345681)
+(593456725)
+(623456781)
+(823426784)
+(963456721)
+(1123455701)
+(1123456712)
+(1123456768)
+(1123456789)
+(1153456711)
+(1193456783)
+(2123356710)
+(2123453713)
+(2123456703)
+
+/* ===================================== PART 6 ===================================== */
+grunt> deposits = filter transactions by transaction_type == 'deposit';
+grunt> results = foreach deposits generate account_number;
+grunt> disresults = DISTINCT results;
+grunt> dump disresults;
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.7.3	0.16.0	bigdata	2021-11-21 04:38:24	2021-11-21 04:38:41	DISTINCT,FILTER
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Maps	Reduces	MaxMapTime	MinMapTime	AvgMapTime	MedianMapTime	MaxReduceTime	MinReduceTime	AvgReduceTime	MedianReducetime	Alias	Feature	Outputs
+job_1637235459803_0034	1	1	1	1	1	1	1	1	1	1	deposits,results,transactions	DISTINCT	hdfs://localhost:8020/tmp/temp1730544802/tmp2009092189,
+
+Input(s):
+Successfully read 88 records (6725 bytes) from: "/user/bigdata/transaction.tbl"
+
+Output(s):
+Successfully stored 33 records (373 bytes) in: "hdfs://localhost:8020/tmp/temp1730544802/tmp2009092189"
+
+Counters:
+Total records written : 33
+Total bytes written : 373
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_1637235459803_0034
+
+ Total input paths to process : 1
+(2223456770)
+(2523456752)
+(2523456757)
+(3123456712)
+(3123456720)
+(3323456721)
+(3623456728)
+(4123456720)
+(4123456730)
+(5023456739)
+(5123456725)
+(6123456705)
+(6223456740)
+(7123456719)
+(7223456719)
+(7823456713)
+(8123456781)
+(9123456717)
+(9123456786)
+(123356784)
+(123456710)
+(123456730)
+(153456782)
+(623456781)
+(823426784)
+(963456721)
+(1123456712)
+(1123456768)
+(1123456789)
+(1153456711)
+(1193456783)
+(2123453713)
+(2123456703)
+

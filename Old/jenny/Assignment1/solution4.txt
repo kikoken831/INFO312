@@ -1,0 +1,82 @@
+bigdata@bigdata-VirtualBox:~$ cd Desktop/Assignment1/
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ echo $HADOOP_CLASSPATH
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ export HADOOP_CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath)
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ javac -cp ${HADOOP_CLASSPATH} solution4.java
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ jar cvf solution4.jar solution4*.classadded manifest
+adding: solution4$BalanceReducer.class(in = 1754) (out= 748)(deflated 57%)
+adding: solution4.class(in = 1498) (out= 816)(deflated 45%)
+adding: solution4$TokenizerMapper.class(in = 2264) (out= 1002)(deflated 55%)
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/bin/hadoop jar solution4.jar solution4 account.txt /user/output2/
+21/04/22 17:26:55 INFO client.RMProxy: Connecting to ResourceManager at bigdata-VirtualBox/10.0.2.15:8032
+21/04/22 17:26:56 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+21/04/22 17:26:56 INFO input.FileInputFormat: Total input paths to process : 1
+21/04/22 17:26:56 INFO mapreduce.JobSubmitter: number of splits:1
+21/04/22 17:26:56 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619057478263_0012
+21/04/22 17:26:56 INFO impl.YarnClientImpl: Submitted application application_1619057478263_0012
+21/04/22 17:26:56 INFO mapreduce.Job: The url to track the job: http://bigdata-VirtualBox:8088/proxy/application_1619057478263_0012/
+21/04/22 17:26:56 INFO mapreduce.Job: Running job: job_1619057478263_0012
+21/04/22 17:27:00 INFO mapreduce.Job: Job job_1619057478263_0012 running in uber mode : false
+21/04/22 17:27:00 INFO mapreduce.Job:  map 0% reduce 0%
+21/04/22 17:27:04 INFO mapreduce.Job:  map 100% reduce 0%
+21/04/22 17:27:08 INFO mapreduce.Job:  map 100% reduce 100%
+21/04/22 17:27:08 INFO mapreduce.Job: Job job_1619057478263_0012 completed successfully
+21/04/22 17:27:09 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=63
+		FILE: Number of bytes written=237677
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=279
+		HDFS: Number of bytes written=51
+		HDFS: Number of read operations=6
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=1580
+		Total time spent by all reduces in occupied slots (ms)=1707
+		Total time spent by all map tasks (ms)=1580
+		Total time spent by all reduce tasks (ms)=1707
+		Total vcore-milliseconds taken by all map tasks=1580
+		Total vcore-milliseconds taken by all reduce tasks=1707
+		Total megabyte-milliseconds taken by all map tasks=1617920
+		Total megabyte-milliseconds taken by all reduce tasks=1747968
+	Map-Reduce Framework
+		Map input records=7
+		Map output records=5
+		Map output bytes=85
+		Map output materialized bytes=63
+		Input split bytes=111
+		Combine input records=5
+		Combine output records=3
+		Reduce input groups=3
+		Reduce shuffle bytes=63
+		Reduce input records=3
+		Reduce output records=3
+		Spilled Records=6
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=86
+		CPU time spent (ms)=880
+		Physical memory (bytes) snapshot=445800448
+		Virtual memory (bytes) snapshot=3821760512
+		Total committed heap usage (bytes)=289406976
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=168
+	File Output Format Counters 
+		Bytes Written=51
+bigdata@bigdata-VirtualBox:~/Desktop/Assignment1$ $HADOOP_HOME/bin/hadoop fs -cat /user/output2/*
+1234567 2019	250
+9876543 2018	150
+9876543 2019	450

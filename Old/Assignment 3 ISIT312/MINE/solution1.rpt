@@ -1,0 +1,168 @@
+/* Student Name: 	Lee Yu Xian */
+/* Student Number: 	7233164 */
+
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+create 'MAINTENANCE','OWNER','VEHICLE','REPAIR','TIME'
+0 row(s) in 1.3440 seconds
+
+Hbase::Table - MAINTENANCE
+
+put 'MAINTENANCE','owner:007','OWNER:licence-number','007'
+0 row(s) in 0.1220 seconds
+
+put 'MAINTENANCE','owner:007','OWNER:first-name','James'
+0 row(s) in 0.0040 seconds
+
+put 'MAINTENANCE','owner:007','OWNER:last-name','Bond'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','owner:007','OWNER:phone','007007007'
+0 row(s) in 0.0030 seconds
+
+
+put 'MAINTENANCE','vehicle:MI6-007|007','VEHICLE:registration','MI6-007'
+0 row(s) in 0.0070 seconds
+
+put 'MAINTENANCE','vehicle:MI6-007|007','VEHICLE:make','Jaguar'
+0 row(s) in 0.0040 seconds
+
+put 'MAINTENANCE','vehicle:MI6-007|007','VEHICLE:model','F-Pace'
+0 row(s) in 0.0020 seconds
+
+put 'MAINTENANCE','vehicle:MI6-007|007','OWNER:licence-number','007'
+0 row(s) in 0.0070 seconds
+
+
+put 'MAINTENANCE','vehicle:ABC-123|007','VEHICLE:registration','ABC-123'
+0 row(s) in 0.0050 seconds
+
+put 'MAINTENANCE','vehicle:ABC-123|007','VEHICLE:make','Aston Martin'
+0 row(s) in 0.0060 seconds
+
+put 'MAINTENANCE','vehicle:ABC-123|007','VEHICLE:model','DB5'
+0 row(s) in 0.0060 seconds
+
+put 'MAINTENANCE','vehicle:ABC-123|007','OWNER:licence-number','007'
+0 row(s) in 0.0040 seconds
+
+
+put 'MAINTENANCE','repair:MI6-007','REPAIR:labour-cost','1000000'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:MI6-007','REPAIR:parts-cost','2000000'
+0 row(s) in 0.0040 seconds
+
+put 'MAINTENANCE','repair:MI6-007','REPAIR:complexity-level','7'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:MI6-007','VEHICLE:registration','MI6-007'
+0 row(s) in 0.0060 seconds
+
+put 'MAINTENANCE','repair:MI6-007','TIME:start-day','17'
+0 row(s) in 0.0020 seconds
+
+put 'MAINTENANCE','repair:MI6-007','TIME:start-month','Oct'
+0 row(s) in 0.0040 seconds
+
+put 'MAINTENANCE','repair:MI6-007','TIME:start-year','2020'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:MI6-007','TIME:end-day','10'
+0 row(s) in 0.0060 seconds
+
+put 'MAINTENANCE','repair:MI6-007','TIME:end-month','Jul'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:MI6-007','TIME:end-year','2021'
+0 row(s) in 0.0060 seconds
+
+
+put 'MAINTENANCE','repair:ABC-123','REPAIR:labour-cost','3000000'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:ABC-123','REPAIR:parts-cost','2500000'
+0 row(s) in 0.0040 seconds
+
+put 'MAINTENANCE','repair:ABC-123','REPAIR:complexity-level','8'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:ABC-123','VEHICLE:registration','ABC-123'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:ABC-123','TIME:start-day','14'
+0 row(s) in 0.0030 seconds
+
+put 'MAINTENANCE','repair:ABC-123','TIME:start-month','Nov'
+0 row(s) in 0.0070 seconds
+
+put 'MAINTENANCE','repair:ABC-123','TIME:start-year','2021'
+0 row(s) in 0.0040 seconds
+
+put 'MAINTENANCE','repair:ABC-123','TIME:end-day','15'
+0 row(s) in 0.0020 seconds
+
+put 'MAINTENANCE','repair:ABC-123','TIME:end-month','Nov'
+0 row(s) in 0.0020 seconds
+
+put 'MAINTENANCE','repair:ABC-123','TIME:end-year','2021'
+0 row(s) in 0.0030 seconds
+
+
+desc 'MAINTENANCE'
+Table MAINTENANCE is ENABLED
+MAINTENANCE
+COLUMN FAMILIES DESCRIPTION
+{NAME => 'OWNER', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'REPAIR', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'TIME', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'VEHICLE', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+4 row(s) in 0.0330 seconds
+
+
+scan 'MAINTENANCE'
+ROW  COLUMN+CELL
+ owner:007 column=OWNER:first-name, timestamp=1637241246645, value=James
+ owner:007 column=OWNER:last-name, timestamp=1637241246659, value=Bond
+ owner:007 column=OWNER:licence-number, timestamp=1637241246630, value=007
+ owner:007 column=OWNER:phone, timestamp=1637241246677, value=007007007
+ repair:ABC-123 column=REPAIR:complexity-level, timestamp=1637241246845, value=8
+ repair:ABC-123 column=REPAIR:labour-cost, timestamp=1637241246833, value=3000000
+ repair:ABC-123 column=REPAIR:parts-cost, timestamp=1637241246837, value=2500000
+ repair:ABC-123 column=TIME:end-day, timestamp=1637241246878, value=15
+ repair:ABC-123 column=TIME:end-month, timestamp=1637241246883, value=Nov
+ repair:ABC-123 column=TIME:end-year, timestamp=1637241246888, value=2021
+ repair:ABC-123 column=TIME:start-day, timestamp=1637241246855, value=14
+ repair:ABC-123 column=TIME:start-month, timestamp=1637241246864, value=Nov
+ repair:ABC-123 column=TIME:start-year, timestamp=1637241246873, value=2021
+ repair:ABC-123 column=VEHICLE:registration, timestamp=1637241246850, value=ABC-123
+ repair:MI6-007 column=REPAIR:complexity-level, timestamp=1637241246784, value=7
+ repair:MI6-007 column=REPAIR:labour-cost, timestamp=1637241246769, value=1000000
+ repair:MI6-007 column=REPAIR:parts-cost, timestamp=1637241246775, value=2000000
+ repair:MI6-007 column=TIME:end-day, timestamp=1637241246815, value=10
+ repair:MI6-007 column=TIME:end-month, timestamp=1637241246819, value=Jul
+ repair:MI6-007 column=TIME:end-year, timestamp=1637241246828, value=2021
+ repair:MI6-007 column=TIME:start-day, timestamp=1637241246797, value=17
+ repair:MI6-007 column=TIME:start-month, timestamp=1637241246802, value=Oct
+ repair:MI6-007 column=TIME:start-year, timestamp=1637241246807, value=2020
+ repair:MI6-007 column=VEHICLE:registration, timestamp=1637241246794, value=MI6-007
+ vehicle:ABC-123|007 column=OWNER:licence-number, timestamp=1637241246764, value=007
+ vehicle:ABC-123|007 column=VEHICLE:make, timestamp=1637241246735, value=Aston Martin
+ vehicle:ABC-123|007 column=VEHICLE:model, timestamp=1637241246745, value=DB5
+ vehicle:ABC-123|007 column=VEHICLE:registration, timestamp=1637241246723, value=ABC-123
+ vehicle:MI6-007|007 column=OWNER:licence-number, timestamp=1637241246715, value=007
+ vehicle:MI6-007|007 column=VEHICLE:make, timestamp=1637241246696, value=Jaguar
+ vehicle:MI6-007|007 column=VEHICLE:model, timestamp=1637241246705, value=F-Pace
+ vehicle:MI6-007|007 column=VEHICLE:registration, timestamp=1637241246687, value=MI6-007
+5 row(s) in 0.0280 seconds
+
+
+disable 'MAINTENANCE'
+0 row(s) in 2.2390 seconds
+
+
+drop 'MAINTENANCE'
+0 row(s) in 1.2280 seconds
+

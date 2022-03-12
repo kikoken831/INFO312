@@ -1,0 +1,17 @@
+val task1 = spark.sparkContext.textFile("/user/bigdata/sales.txt").
+map(_.split(" ")).
+map(attributes => Sales(attributes(0), attributes(1).trim.toInt)).toDS()
+task1.show()
+task1.groupBy($"name").sum("amount").show(false)
+
+case class Sales(name: String, amount: Long)
+val task2 = Seq(Sales("bolt", 45), Sales("bolt", 5), Sales("drill", 1), Sales("drill", 1), Sales("screw", 1), Sales("screw", 2), Sales("screw", 3)).toDS()
+task2.show()
+task2.groupBy($"name").sum("amount").show(false)
+
+val task3 = spark.sparkContext.textFile("/user/bigdata/sales.txt").
+map(_.split(" ")).
+map(attributes => Sales(attributes(0), attributes(1).trim.toInt)).toDF()
+task3.createOrReplaceTempView("sales")
+val sqltask3 = spark.sql("select name, sum(amount) from sales group by name")
+sqltask3.show()
