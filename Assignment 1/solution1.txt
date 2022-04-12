@@ -1,0 +1,30 @@
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -mkdir input
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -put weather.txt input
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -cat input/weather.txt
+Queensland,Gold Coast,25
+Victoria,Melbourne,125
+Victoria,Geelong,90
+Victoria,Wodonga,10
+NSW,Lismore,900
+Queensland,Brisbane,50
+South Australia,Adelaide,300
+Western Australia,Perth,200
+Western Australia,Albany,200
+Western Australia,Broome,10
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ 
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ javac -classpath ${HADOOP_CLASSPATH} solution1.java bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ jar cf solution1.jar solution1.class
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop jar solution1.jar solution1 input/weather.txt output/weather2.txt
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -cat input/weather.txtcat: `input/weather.txt': No such file or directory
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -cat output/weather2.txt
+Queensland,Gold Coast,25
+Victoria,Melbourne,125
+Victoria,Geelong,90
+Victoria,Wodonga,10
+NSW,Lismore,900
+Queensland,Brisbane,50
+South Australia,Adelaide,300
+Western Australia,Perth,200
+Western Australia,Albany,200
+Western Australia,Broome,10
+bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ 
+
