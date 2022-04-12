@@ -1,3 +1,8 @@
+//STUDENT NAME: KENDRICK KEE
+//UOW ID: 7366814
+//Output from terminal
+
+
 bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -mkdir input
 bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -put weather.txt input
 bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -cat input/weather.txt
