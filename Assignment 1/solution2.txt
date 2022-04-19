@@ -95,14 +95,15 @@ bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hado
 	File Output Format Counters 
 		Bytes Written=222
 bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -cat /user/out/part-r-00000
-Arizona	890 890 890
-California	1125 550 225
-Illinois	150 150 150
-NSW	900 900 900
-Pennsylvania	750 750 750
-Queensland	75 50 25
-South Australia	300 300 300
-Texas	1060 600 110
-Victoria	225 125 10
-Western Australia	410 200 10
+Arizona             	890	890	890
+California          	1125	550	225
+Illinois            	150	150	150
+NSW                 	900	900	900
+Pennsylvania        	750	750	750
+Queensland          	75	50	25
+South Australia     	300	300	300
+Texas               	1060	600	110
+Victoria            	225	125	10
+Western Australia   	410	200	10
+
 

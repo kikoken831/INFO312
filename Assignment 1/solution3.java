@@ -18,7 +18,6 @@ public class solution3 {
     Job job = Job.getInstance(conf, "word count");
     job.setJarByClass(solution3.class);
     job.setMapperClass(TokenizerMapper.class);
-    job.setCombinerClass(IntSumReducer.class);
     job.setReducerClass(IntSumReducer.class);
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
@@ -67,7 +66,7 @@ public class solution3 {
   }
 
   public static class IntSumReducer
-      extends Reducer<Text, IntWritable, Text, IntWritable> {
+      extends Reducer<Text, IntWritable, Text, Text> {
     private IntWritable result = new IntWritable();
 
     public void reduce(Text key, Iterable<IntWritable> values,
