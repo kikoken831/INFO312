@@ -26,73 +26,49 @@ public class solution2 {
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
     System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
-	public static class IntArrayWritable extends ArrayWritable {
 
-	    public IntArrayWritable(IntWritable[] values) {
-		super(IntWritable.class, values);
-	    }
-
-	    @Override
-	    public IntWritable[] get() {
-		return (IntWritable[]) super.get();
-	    }
-
-	    @Override
-	    public String toString() {
-		IntWritable[] values = get();
-		return values[0].toString() + " " + values[1].toString() + " " + values[2].toString();
-	    }
-	}
 
   public static class TokenizerMapper
-       extends Mapper<Object, Text, Text, IntWritable>{
+      extends Mapper<Object, Text, Text, IntWritable> {
 
     private final static IntWritable counter = new IntWritable(0);
     private Text word = new Text();
-	private Text dump = new Text();
-    public void map(Object key, Text value, Context context
-                    ) throws IOException, InterruptedException {
-      StringTokenizer itr = new StringTokenizer(value.toString(),",");
+    private Text dump = new Text();
+
+    public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+      StringTokenizer itr = new StringTokenizer(value.toString(), ",");
       while (itr.hasMoreTokens()) {
         word.set(itr.nextToken());
-	dump.set(itr.nextToken());
-        counter.set( Integer.parseInt(itr.nextToken()) );
+        dump.set(itr.nextToken());
+        counter.set(Integer.parseInt(itr.nextToken()));
         context.write(word, counter);
       }
     }
   }
 
   public static class IntMinMaxSumReducer
-       extends Reducer<Text,IntWritable,Text,IntArrayWritable> {
+      extends Reducer<Text, IntWritable, Text, Text> {
 
-    public void reduce(Text key, Iterable<IntWritable> values,
-                       Context context
-                       ) throws IOException, InterruptedException {
+    public void reduce(javax.xml.soap.Text key, Iterable<IntWritable> values,
+        Context context) throws IOException, InterruptedException {
       int max = Integer.MIN_VALUE;
-      int min = Integer.MAX_VALUE; 
+      int min = Integer.MAX_VALUE;
       int sum = 0;
 
+      for (IntWritable val : values) {
+        sum += val.get();
 
-      for (IntWritable val : values)
-      {
-	      sum += val.get();
-
-		  if ( val.get() > max )
-		  {
-		      max = val.get();
-		  }
-	      if ( val.get() < min )
-	      {
-	          min = val.get();
-	      }
+        if (val.get() > max) {
+          max = val.get();
+        }
+        if (val.get() < min) {
+          min = val.get();
+        }
       }
-      IntWritable[] temp = new IntWritable[3];
-      IntArrayWritable output = new IntArrayWritable(temp);
-      temp[0] = new IntWritable(sum);
-      temp[1] = new IntWritable(max);
-      temp[2] = new IntWritable(min);
-      output.set(temp);
-      context.write(key,new IntArrayWritable(output.get()));
+      String formatRes = Integer.toString(sum) + "\t" + Integer.toString(max) + "\t" + Integer.toString(min);
+      Text formatKey = new Text(String.format("%-20s", key.toString()));
+      Text formatResTes = new Text(formatRes);
+      context.write(formatKey,formatRes);
 
     }
   }
