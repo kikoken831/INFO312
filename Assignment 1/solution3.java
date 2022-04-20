@@ -47,12 +47,12 @@ public class solution3 {
       xl.set("X long:");
       xxl.set("XX long:");
       //init map of keys but empty
-      context.write(xs,IntWritable(0));
-      context.write(s,IntWritable(0));
-      context.write(m,IntWritable(0));
-      context.write(l,IntWritable(0));
-      context.write(xl,IntWritable(0));
-      context.write(xxl,IntWritable(0));
+      context.write(xs,new IntWritable(0));
+      context.write(s,new IntWritable(0));
+      context.write(m,new IntWritable(0));
+      context.write(l,new IntWritable(0));
+      context.write(xl,new IntWritable(0));
+      context.write(xxl,new IntWritable(0));
       while (itr.hasMoreTokens()) {
         word.set(itr.nextToken());
 

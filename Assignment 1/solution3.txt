@@ -88,6 +88,9 @@ bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hado
 	File Output Format Counters 
 		Bytes Written=31
 bigdata@bigdata-VirtualBox:~/Desktop/INFO312/Assignment 1$ $HADOOP_HOME/bin/hadoop fs -cat /user/output/part-r-00000
+X long: 	0 words
 X short:	12 words
+XX long:	0 words
+long:   	0 words
 medium: 	3 words
 short:  	9 words
