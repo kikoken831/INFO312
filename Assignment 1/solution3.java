@@ -37,7 +37,7 @@ public class solution3 {
     private Text l = new Text();
     private Text xl = new Text();
     private Text xxl = new Text();
-
+    
     public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
       StringTokenizer itr = new StringTokenizer(value.toString());
       xs.set("X short:");
@@ -46,6 +46,13 @@ public class solution3 {
       l.set("long:");
       xl.set("X long:");
       xxl.set("XX long:");
+      //init map of keys but empty
+      context.write(xs,IntWritable(0));
+      context.write(s,IntWritable(0));
+      context.write(m,IntWritable(0));
+      context.write(l,IntWritable(0));
+      context.write(xl,IntWritable(0));
+      context.write(xxl,IntWritable(0));
       while (itr.hasMoreTokens()) {
         word.set(itr.nextToken());
 
