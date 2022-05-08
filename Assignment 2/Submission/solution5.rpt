@@ -1,0 +1,196 @@
+>>>  --Name:Kendrick Kee
+>>>  --UOW ID: 7366814
+>>>  --Qn5.1
+>>>  --
+>>>  select ps_partkey,ps_availqty,min(ps_availqty) 
+over (partition by ps_partkey) as smallest 
+,avg(ps_availqty) over (partition by ps_partkey) as average 
+from partsupp 
+where ps_partkey in (5,15);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+-----------+------------+--+
+| ps_partkey  | ps_availqty  | smallest  |  average   |
++-------------+--------------+-----------+------------+--+
+| 5           | 6925         | 1329      | 5410.5000  |
+| 5           | 1329         | 1329      | 5410.5000  |
+| 5           | 9653         | 1329      | 5410.5000  |
+| 5           | 3735         | 1329      | 5410.5000  |
+| 15          | 5255         | 3316      | 4738.5000  |
+| 15          | 3316         | 3316      | 4738.5000  |
+| 15          | 3336         | 3316      | 4738.5000  |
+| 15          | 7047         | 3316      | 4738.5000  |
++-------------+--------------+-----------+------------+--+
+8 rows selected (26.5 seconds)
+>>>  
+>>>  --Qn5.2
+>>>  select ps_partkey,ps_availqty 
+from partsupp 
+where ps_partkey in (5,10,15,25) 
+group by ps_partkey,ps_availqty with cube 
+order by ps_partkey,ps_availqty asc;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+--+
+| ps_partkey  | ps_availqty  |
++-------------+--------------+--+
+| NULL        | NULL         |
+| NULL        | 841          |
+| NULL        | 1329         |
+| NULL        | 2952         |
+| NULL        | 3316         |
+| NULL        | 3335         |
+| NULL        | 3336         |
+| NULL        | 3735         |
+| NULL        | 5255         |
+| NULL        | 5691         |
+| NULL        | 6925         |
+| NULL        | 7047         |
+| NULL        | 9653         |
+| 5           | NULL         |
+| 5           | 1329         |
+| 5           | 3735         |
+| 5           | 6925         |
+| 5           | 9653         |
+| 10          | NULL         |
+| 10          | 841          |
+| 10          | 2952         |
+| 10          | 3335         |
+| 10          | 5691         |
+| 15          | NULL         |
+| 15          | 3316         |
+| 15          | 3336         |
+| 15          | 5255         |
+| 15          | 7047         |
++-------------+--------------+--+
+28 rows selected (60.217 seconds)
+>>>  
+>>>  --Qn5.3
+>>>  select ps_partkey,ps_availqty,ps_supplycost 
+from partsupp 
+where ps_partkey in (5,10,15,25) 
+group by ps_partkey,ps_availqty,ps_supplycost with cube 
+order by ps_partkey,ps_supplycost,ps_availqty asc;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+----------------+--+
+| ps_partkey  | ps_availqty  | ps_supplycost  |
++-------------+--------------+----------------+--+
+| NULL        | NULL         | NULL           |
+| NULL        | 841          | NULL           |
+| NULL        | 1329         | NULL           |
+| NULL        | 2952         | NULL           |
+| NULL        | 3316         | NULL           |
+| NULL        | 3335         | NULL           |
+| NULL        | 3336         | NULL           |
+| NULL        | 3735         | NULL           |
+| NULL        | 5255         | NULL           |
+| NULL        | 5691         | NULL           |
+| NULL        | 6925         | NULL           |
+| NULL        | 7047         | NULL           |
+| NULL        | 9653         | NULL           |
+| NULL        | NULL         | 50.52          |
+| NULL        | 9653         | 50.52          |
+| NULL        | NULL         | 164.00         |
+| NULL        | 5691         | 164.00         |
+| NULL        | NULL         | 219.83         |
+| NULL        | 1329         | 219.83         |
+| NULL        | NULL         | 255.88         |
+| NULL        | 3735         | 255.88         |
+| NULL        | NULL         | 265.89         |
+| NULL        | 3316         | 265.89         |
+| NULL        | NULL         | 374.02         |
+| NULL        | 841          | 374.02         |
+| NULL        | NULL         | 458.67         |
+| NULL        | 5255         | 458.67         |
+| NULL        | NULL         | 537.98         |
+| NULL        | 6925         | 537.98         |
+| NULL        | NULL         | 673.27         |
+| NULL        | 3335         | 673.27         |
+| NULL        | NULL         | 784.55         |
+| NULL        | 3336         | 784.55         |
+| NULL        | NULL         | 835.70         |
+| NULL        | 7047         | 835.70         |
+| NULL        | NULL         | 996.12         |
+| NULL        | 2952         | 996.12         |
+| 5           | NULL         | NULL           |
+| 5           | 1329         | NULL           |
+| 5           | 3735         | NULL           |
+| 5           | 6925         | NULL           |
+| 5           | 9653         | NULL           |
+| 5           | NULL         | 50.52          |
+| 5           | 9653         | 50.52          |
+| 5           | NULL         | 219.83         |
+| 5           | 1329         | 219.83         |
+| 5           | NULL         | 255.88         |
+| 5           | 3735         | 255.88         |
+| 5           | NULL         | 537.98         |
+| 5           | 6925         | 537.98         |
+| 10          | NULL         | NULL           |
+| 10          | 841          | NULL           |
+| 10          | 2952         | NULL           |
+| 10          | 3335         | NULL           |
+| 10          | 5691         | NULL           |
+| 10          | NULL         | 164.00         |
+| 10          | 5691         | 164.00         |
+| 10          | NULL         | 374.02         |
+| 10          | 841          | 374.02         |
+| 10          | NULL         | 673.27         |
+| 10          | 3335         | 673.27         |
+| 10          | NULL         | 996.12         |
+| 10          | 2952         | 996.12         |
+| 15          | NULL         | NULL           |
+| 15          | 3316         | NULL           |
+| 15          | 3336         | NULL           |
+| 15          | 5255         | NULL           |
+| 15          | 7047         | NULL           |
+| 15          | NULL         | 265.89         |
+| 15          | 3316         | 265.89         |
+| 15          | NULL         | 458.67         |
+| 15          | 5255         | 458.67         |
+| 15          | NULL         | 784.55         |
+| 15          | 3336         | 784.55         |
+| 15          | NULL         | 835.70         |
+| 15          | 7047         | 835.70         |
++-------------+--------------+----------------+--+
+76 rows selected (58.372 seconds)
+>>>  
+>>>  
+>>>  
+>>>  --Qn5.4
+>>>  select ps_partkey,ps_availqty, ROW_NUMBER() over 
+(partition by ps_partkey order by ps_availqty desc) 
+from partsupp 
+where ps_partkey in (10,20);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+-----+--+
+| ps_partkey  | ps_availqty  | c2  |
++-------------+--------------+-----+--+
+| 10          | 5691         | 1   |
+| 10          | 3335         | 2   |
+| 10          | 2952         | 3   |
+| 10          | 841          | 4   |
+| 20          | 5905         | 1   |
+| 20          | 4271         | 2   |
+| 20          | 2927         | 3   |
+| 20          | 2723         | 4   |
++-------------+--------------+-----+--+
+8 rows selected (30.43 seconds)
+>>>  
+>>>  --Qn5.5
+>>>  select ps_partkey,ps_availqty, avg(ps_availqty) 
+over (partition by ps_partkey order by ps_availqty rows unbounded preceding) 
+from partsupp 
+where ps_partkey in (15,25);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
++-------------+--------------+------------+--+
+| ps_partkey  | ps_availqty  |     c2     |
++-------------+--------------+------------+--+
+| 15          | 3316         | 3316.0000  |
+| 15          | 3336         | 3326.0000  |
+| 15          | 5255         | 3969.0000  |
+| 15          | 7047         | 4738.5000  |
++-------------+--------------+------------+--+
+4 rows selected (29.429 seconds)
+>>>  
+>>>  !record;
+Unknown command: record;
+Aborting command set because "force" is false and command failed: "!record;"
+>>>  !record solution5.rpt

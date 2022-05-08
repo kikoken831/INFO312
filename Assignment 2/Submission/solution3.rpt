@@ -1,0 +1,51 @@
+>>>  --Name: Kendrick Kee
+>>>  --UOW ID: 7366814
+>>>  --CREATE PROJECT TABLE
+>>>  create table project( 
+employee_id int, 
+employee_name varchar(50), 
+projects map<string,int>, 
+languages array<string> 
+) 
+row format delimited fields terminated by ',' stored as textfile;
+No rows affected (0.064 seconds)
+>>>  
+>>>  --INSERT 5 ROWS
+>>>  --2x employees with multiple projects and multiple languages
+>>>  insert into project select 1,'Kendrick Kee',map('DB 3',30,'Oracle',25,'SQL-2022',100),array('Java','C','C++');
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (18.391 seconds)
+>>>  insert into project select 2,'Hendrick Lee',map('DB 2',40,'Oracle2',15,'SQL-2025',0),array('Python','JS','C++');
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (22.49 seconds)
+>>>  --1x employees with multiple projects but no languages
+>>>  insert into project select 3,'Kenji Miyasaki',map('DB 420',30,'OracleX',35,'SeQL-2022',77),array();
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (21.943 seconds)
+>>>  --1x employees with no projects but multiple languages
+>>>  insert into project select 4,'Henry Lee',map(NULL,cast(NULL as int)),array('Python','JS','Go');
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (22.826 seconds)
+>>>  --1x employees with no projects and no languages
+>>>  insert into project select 5, 'Brainlet Boon',map(NULL,cast(NULL as int)),array();
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+No rows affected (22.534 seconds)
+>>>  
+>>>  --VIEW TABLE
+>>>  select * from PROJECT;
++----------------------+------------------------+--------------------------------------------+------------------------+--+
+| project.employee_id  | project.employee_name  |              project.projects              |   project.languages    |
++----------------------+------------------------+--------------------------------------------+------------------------+--+
+| 1                    | Kendrick Kee           | {"DB 3":30,"Oracle":25,"SQL-2022":100}     | ["Java","C","C++"]     |
+| 2                    | Hendrick Lee           | {"DB 2":40,"Oracle2":15,"SQL-2025":0}      | ["Python","JS","C++"]  |
+| 3                    | Kenji Miyasaki         | {"DB 420":30,"OracleX":35,"SeQL-2022":77}  | []                     |
+| 4                    | Henry Lee              | {}                                         | ["Python","JS","Go"]   |
+| 5                    | Brainlet Boon          | {}                                         | []                     |
++----------------------+------------------------+--------------------------------------------+------------------------+--+
+5 rows selected (0.179 seconds)
+>>>  
+>>>  --Clean up
+>>>  drop table PROJECT;
+No rows affected (0.099 seconds)
+>>>  
+>>>  !record

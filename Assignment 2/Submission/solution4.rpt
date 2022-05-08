@@ -1,0 +1,91 @@
+>>>  
+>>>  --Name: Kendrick Kee
+>>>  --UOW ID: 73668314
+>>>  
+>>>  create external table part( 
+p_partkey decimal(10), 
+p_name varchar(50), 
+p_mfgr varchar(30), 
+p_brand varchar(30), 
+p_type varchar(30), 
+p_size varchar(30), 
+p_container varchar(30), 
+p_retailprice decimal(10,2), 
+p_comment varchar(30) 
+) 
+row format delimited fields terminated by '|' 
+stored as textfile location '/user/bigdata/Asn2/part';
+No rows affected (0.084 seconds)
+>>>  
+>>>  create external table supplier( 
+ 
+s_suppkey decimal(10), 
+s_name varchar(50), 
+s_address varchar(30), 
+s_val decimal(10), 
+s_phone varchar (10), 
+s_acctbal decimal(10,2), 
+s_comment varchar(50) 
+ 
+) 
+row format delimited fields terminated by '|' 
+stored as textfile location '/user/bigdata/Asn2/supplier';
+No rows affected (0.178 seconds)
+>>>  
+>>>  create external table partsupp( 
+ps_partkey decimal(10), 
+ps_suppkey decimal(10), 
+ps_availqty decimal(10), 
+ps_supplycost decimal(10,2), 
+ps_comment varchar(50) 
+) 
+row format delimited fields terminated by '|' 
+stored as textfile location '/user/bigdata/Asn2/partsupp';
+No rows affected (0.13 seconds)
+>>>  
+>>>  
+>>>  --select from tables
+>>>  select * from part limit 5;
++-----------------+-----------------------------------------+-----------------+---------------+--------------------------+--------------+-------------------+---------------------+-------------------------+--+
+| part.p_partkey  |               part.p_name               |   part.p_mfgr   | part.p_brand  |       part.p_type        | part.p_size  | part.p_container  | part.p_retailprice  |     part.p_comment      |
++-----------------+-----------------------------------------+-----------------+---------------+--------------------------+--------------+-------------------+---------------------+-------------------------+--+
+| 1               | goldenrod lace spring peru powder       | Manufacturer#1  | Brand#13      | PROMO BURNISHED COPPER   | 7            | JUMBO PKG         | 901.00              | final deposits s        |
+| 2               | blush rosy metallic lemon navajo        | Manufacturer#1  | Brand#13      | LARGE BRUSHED BRASS      | 1            | LG CASE           | 902.00              | final platelets hang f  |
+| 3               | dark green antique puff wheat           | Manufacturer#4  | Brand#42      | STANDARD POLISHED BRASS  | 21           | WRAP CASE         | 903.00              | unusual excuses ac      |
+| 4               | chocolate metallic smoke ghost drab     | Manufacturer#3  | Brand#34      | SMALL PLATED BRASS       | 14           | MED DRUM          | 904.00              | ironi                   |
+| 5               | forest blush chiffon thistle chocolate  | Manufacturer#3  | Brand#32      | STANDARD POLISHED TIN    | 15           | SM PKG            | 905.00              | pending, spe            |
++-----------------+-----------------------------------------+-----------------+---------------+--------------------------+--------------+-------------------+---------------------+-------------------------+--+
+5 rows selected (0.212 seconds)
+>>>  select * from supplier limit 5;
++---------------------+---------------------+---------------------------------+-----------------+-------------------+---------------------+-----------------------------------------------------+--+
+| supplier.s_suppkey  |   supplier.s_name   |       supplier.s_address        | supplier.s_val  | supplier.s_phone  | supplier.s_acctbal  |                 supplier.s_comment                  |
++---------------------+---------------------+---------------------------------+-----------------+-------------------+---------------------+-----------------------------------------------------+--+
+| 1                   | Supplier#000000001  |  N kD4on9OM Ipw3,gf0JBoQDd7tgr  | 17              | 27-918-335        | 5755.94             | requests haggle carefully. accounts sublate finall  |
+| 2                   | Supplier#000000002  | 89eJ5ksX3ImxJQBvxObC,           | 5               | 15-679-861        | 4032.68             | furiously stealthy frays thrash alongside of the s  |
+| 3                   | Supplier#000000003  | q1,G3Pj6OjIuUYfUoH18BFTKP5aU9b  | 1               | 11-383-516        | 4192.40             | furiously regular instructions impress slyly! care  |
+| 4                   | Supplier#000000004  | Bk7ah4CK8SYQTepEmvMkkgMwg       | 15              | 25-843-787        | 4641.08             | final ideas cajole. furiously close dep             |
+| 5                   | Supplier#000000005  | Gcdm2rJRzl5qlTVzc               | 11              | 21-151-690        | -283.84             | carefully silent instructions are slyly according   |
++---------------------+---------------------+---------------------------------+-----------------+-------------------+---------------------+-----------------------------------------------------+--+
+5 rows selected (0.148 seconds)
+>>>  select * from partsupp limit 5;
++----------------------+----------------------+-----------------------+-------------------------+-----------------------------------------------------+--+
+| partsupp.ps_partkey  | partsupp.ps_suppkey  | partsupp.ps_availqty  | partsupp.ps_supplycost  |                 partsupp.ps_comment                 |
++----------------------+----------------------+-----------------------+-------------------------+-----------------------------------------------------+--+
+| 1                    | 2                    | 3325                  | 771.64                  | requests after the carefully ironic ideas cajole a  |
+| 1                    | 752                  | 8076                  | 993.49                  | careful pinto beans wake slyly furiously silent pi  |
+| 1                    | 1502                 | 3956                  | 337.09                  | boldly silent requests detect. quickly regular cou  |
+| 1                    | 2252                 | 4069                  | 357.84                  | regular deposits are. furiously even packages cajo  |
+| 2                    | 3                    | 8895                  | 378.49                  | furiously even asymptotes are furiously regular pl  |
++----------------------+----------------------+-----------------------+-------------------------+-----------------------------------------------------+--+
+5 rows selected (0.144 seconds)
+>>>  
+>>>  -- Drop Tables
+>>>  drop table partsupp;
+No rows affected (0.134 seconds)
+>>>  drop table part;
+No rows affected (0.104 seconds)
+>>>  drop table supplier;
+No rows affected (0.079 seconds)
+>>>  
+>>>  
+>>>  !record
