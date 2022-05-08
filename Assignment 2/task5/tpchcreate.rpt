@@ -1,0 +1,62 @@
+>>>  
+>>>  CREATE TABLE PARTSUPP( 
+PS_PARTKEY 	DECIMAL(12)	, 
+PS_SUPPKEY	DECIMAL(12)	, 
+PS_AVAILQTY	DECIMAL(12)	, 
+PS_SUPPLYCOST	DECIMAL(12,2)	, 
+PS_COMMENT	VARCHAR(199)	 ) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' 
+STORED AS TEXTFILE;
+No rows affected (0.068 seconds)
+>>>  
+>>>  LOAD DATA LOCAL INPATH './Desktop/INFO312/Assignment\ 2/task5/partsupp.tbl' INTO TABLE PARTSUPP;
+No rows affected (0.641 seconds)
+>>>  
+>>>  CREATE TABLE ORDERS( 
+O_ORDERKEY	DECIMAL(12)	, 
+O_CUSTKEY	DECIMAL(12)	, 
+O_ORDERSTATUS	CHAR(1)		, 
+O_TOTALPRICE	DECIMAL(12,2)	, 
+O_ORDERDATE	DATE		, 
+O_ORDERPRIORITY CHAR(15)	, 
+O_CLERK		CHAR(15)	, 
+O_SHIPPRIORITY	DECIMAL(12)	, 
+O_COMMENT	VARCHAR(79)	 ) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' 
+STORED AS TEXTFILE;
+No rows affected (0.149 seconds)
+>>>  
+>>>  LOAD DATA LOCAL INPATH './Desktop/INFO312/Assignment\ 2/task5/orders.tbl' INTO TABLE ORDERS;
+No rows affected (0.244 seconds)
+>>>  
+>>>  CREATE TABLE LINEITEM( 
+L_ORDERKEY 	DECIMAL(12)	, 
+L_PARTKEY	DECIMAL(12)	, 
+L_SUPPKEY	DECIMAL(12)	, 
+L_LINENUMBER	DECIMAL(12)	, 
+L_QUANTITY	DECIMAL(12,2)	, 
+L_EXTENDEDPRICE DECIMAL(12,2)	, 
+L_DISCOUNT	DECIMAL(12,2)	, 
+L_TAX		DECIMAL(12,2)	, 
+L_RETURNFLAG	CHAR(1)		, 
+L_LINESTATUS	CHAR(1)		, 
+L_SHIPDATE	DATE		, 
+L_COMMITDATE	DATE		, 
+L_RECEIPTDATE	DATE		, 
+L_SHIPINSTRUCT	CHAR(25)	, 
+L_SHIPMODE	CHAR(10)	, 
+L_COMMENT	VARCHAR(44)	 ) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' 
+STORED AS TEXTFILE;
+No rows affected (0.167 seconds)
+>>>  
+>>>  LOAD DATA LOCAL INPATH 'lineitem.tbl' INTO TABLE LINEITEM;
+Error: Error while compiling statement: FAILED: SemanticException Line 1:23 Invalid path ''lineitem.tbl'': No files matching path file:/home/bigdata/lineitem.tbl (state=42000,code=40000)
+Aborting command set because "force" is false and command failed: "LOAD DATA LOCAL INPATH 'lineitem.tbl' INTO TABLE LINEITEM;"
+>>>  DROP TABLE PARTSUPP;
+No rows affected (0.131 seconds)
+>>>  DROP TABLE ORDERS;
+No rows affected (0.189 seconds)
+>>>  DROP TABLE LINEITEM;
+No rows affected (0.17 seconds)
+>>>  ! record tpchcreate.rpt
