@@ -3,6 +3,7 @@
 --Name: Kendrick Kee
 --UOW ID: 73668314
 
+
 create external table part(
 	p_partkey decimal(10),
 	p_name varchar(50),
@@ -44,7 +45,12 @@ stored as textfile location '/user/bigdata/Asn2/partsupp';
 
 --select from tables
 select * from part limit 5;
+select count(*) from part limit 5;
+
+select count(*) from supplier limit 5;
 select * from supplier limit 5;
+
+select count(*) from partsupp limit 5;
 select * from partsupp limit 5;
 
 -- Drop Tables

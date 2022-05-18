@@ -1,0 +1,1 @@
+create 'COURSEWORK', 'STUDENT'

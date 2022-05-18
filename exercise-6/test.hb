@@ -1,0 +1,3 @@
+whoami
+version
+help
