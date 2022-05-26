@@ -1,0 +1,204 @@
+grunt> --TASK 1
+grunt> customers = load '/user/bigdata/Assn3/customer/customer.tbl' using PigStorage('|') as (
+>> CUSTOMER_ID:int,
+>> CUSTOMER_CODE:chararray,
+>> COMPANY_NAME:chararray,
+>> CONTACT_NAME:chararray,
+>> CONTACT_TITLE:chararray,
+>> CITY:chararray,
+>> REGION:chararray,
+>> POSTAL_CODE:chararray,
+>> COUNTRY:chararray,
+>> PHONE:chararray,
+>> FAX:chararray);
+grunt> 
+grunt> salespersons = load '/user/bigdata/Assn3/salesperson/salesperson.tbl' using PigStorage('|') as (
+>> EMPLOYEE_ID:int,
+>> LAST_NAME:chararray,
+>> FIRST_NAME:chararray,
+>> TITLE:chararray,
+>> BIRTH_DATE:chararray,
+>> HIRE_DATE:chararray,
+>> NOTES:chararray);
+grunt> 
+grunt> orders = load '/user/bigdata/Assn3/order/order.tbl' using PigStorage('|') as (
+>> ORDER_ID:int,
+>> ORDER_DATE:chararray,
+>> SHIP_VIA:chararray,
+>> SHIP_CITY:chararray,
+>> SHIP_REGION:chararray,
+>> SHIP_POSTAL_CODE:chararray,
+>> SHIP_COUNTRY:chararray);
+grunt> 
+grunt> products = load '/user/bigdata/Assn3/product/product.tbl' using PigStorage('|') as (
+>> PRODUCT_ID:int,
+>> PRODUCT_NAME:chararray,
+>> UNIT_PRICE:double,
+>> UNIT_IN_STOCK:int,
+>> UNIT_ON_STOCK:int,
+>> DISCONTINUED:chararray);
+grunt> 
+grunt> order_details = load '/user/bigdata/Assn3/order_detail/order_detail.tbl' using PigStorage('|') as (
+>> ORDER_ID:int,
+>> PRODUCT_ID:int,
+>> CUSTOMER_ID:int,
+>> SALESPERSON_ID:int,
+>> UNIT_PRICE:double,
+>> QUANTITY:int,
+>> DISCOUNT:double);
+grunt> 
+grunt> 
+grunt> --TASK 2
+grunt> consolidated = filter customers by COMPANY_NAME == 'Consolidated Holdings';
+grunt> consolidated_details = join consolidated by CUSTOMER_ID, order_details by CUSTOMER_ID;
+grunt> consolidated_details_sales = join consolidated_details by SALESPERSON_ID, salespersons by EMPLOYEE_ID;
+grunt> results = foreach consolidated_details_sales generate FIRST_NAME, LAST_NAME;
+grunt> dump results;
+(Andrew,Fuller)
+(Andrew,Fuller)
+(Robert,King)
+(Robert,King)
+(Laura,Callahan)
+(Laura,Callahan)
+(Laura,Callahan)
+grunt> 
+grunt> --TASK 3
+grunt> --get all orders in year 1996
+grunt> orders_1996 = filter orders by ENDSWITH(ORDER_DATE,'1996');
+grunt> 
+grunt> --join with order details
+grunt> order_details_1996 = join orders_1996 by ORDER_ID, order_details by ORDER_ID;
+grunt> 
+grunt> --find all products in orders within 1996
+grunt> group_orders = group order_details_1996 by order_details::PRODUCT_ID;
+grunt> 
+grunt> --get all the id's of products sold in 1996
+grunt> product_id_only = foreach group_orders generate group;
+grunt> 
+grunt> --left outer join with current product list
+grunt> product_full = join products by PRODUCT_ID left outer, product_id_only by group;
+grunt> 
+grunt> --if last col is null, product was not sold in 1996
+grunt> filtered_1996 = filter product_full by product_id_only::group is null;
+grunt> 
+grunt> --get count of filtered
+grunt> c = group filtered_1996 all;
+grunt> count = foreach c generate COUNT(filtered_1996);
+grunt> dump count;
+(3)
+grunt> 
+grunt> --TASK 4
+grunt> 
+grunt> --group products by ID
+grunt> grouped_products = group order_details by PRODUCT_ID;
+grunt> 
+grunt> --for each product, get the sum of qty sold
+grunt> summarize_products = foreach grouped_products generate group,SUM(order_details.QUANTITY);
+grunt> dump summarize_products;
+(1,828)
+(2,1057)
+(3,328)
+(4,453)
+(5,298)
+(6,301)
+(7,763)
+(8,372)
+(9,95)
+(10,742)
+(11,706)
+(12,344)
+(13,891)
+(14,404)
+(15,122)
+(16,1158)
+(17,978)
+(18,539)
+(19,723)
+(20,313)
+(21,1016)
+(22,348)
+(23,580)
+(24,1125)
+(25,318)
+(26,753)
+(27,365)
+(28,640)
+(29,746)
+(30,612)
+(31,1397)
+(32,297)
+(33,755)
+(34,506)
+(35,883)
+(36,805)
+(37,125)
+(38,623)
+(39,793)
+(40,1103)
+(41,981)
+(42,697)
+(43,580)
+(44,601)
+(45,508)
+(46,548)
+(47,485)
+(48,138)
+(49,520)
+(50,235)
+(51,886)
+(52,500)
+(53,722)
+(54,755)
+(55,903)
+(56,1263)
+(57,434)
+(58,534)
+(59,1496)
+(60,1577)
+(61,603)
+(62,1083)
+(63,445)
+(64,740)
+(65,745)
+(66,239)
+(67,184)
+(68,799)
+(69,714)
+(70,817)
+(71,1057)
+(72,806)
+(73,293)
+(74,297)
+(75,1155)
+(76,981)
+(77,791)
+grunt> 
+grunt> --TASK 5
+grunt> 
+grunt> --Prod id of ikura
+grunt> ikura = filter products by PRODUCT_NAME == 'Ikura';
+grunt> 
+grunt> --Prod id of Tofu
+grunt> tofu = filter products by  PRODUCT_NAME == 'Tofu';
+grunt> 
+grunt> --get orders where ikura is present
+grunt> ikura_order = join ikura by PRODUCT_ID, order_details by PRODUCT_ID;
+grunt> 
+grunt> --get orders where tofu is present
+grunt> tofu_order = join tofu by PRODUCT_ID, order_details by PRODUCT_ID;
+grunt> 
+grunt> --get the orderid where ikura is present
+grunt> ikura_order_id = foreach ikura_order generate order_details::ORDER_ID;
+grunt> 
+grunt> --get the orderid where tofu is present
+grunt> tofu_order_id = foreach tofu_order generate order_details::ORDER_ID;
+grunt> 
+grunt> --join both tables together
+grunt> both_orders_id = join ikura_order_id by order_details::ORDER_ID, tofu_order_id by order_details::ORDER_ID;
+grunt> 
+grunt> --view table
+grunt> dump both_orders_id;
+(11077,11077)
+grunt> 
+grunt> 
+grunt> 

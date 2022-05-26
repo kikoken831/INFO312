@@ -1,0 +1,74 @@
+//Task 1
+
+scala> val lines = sc.textFile("sales.txt")
+lines: org.apache.spark.rdd.RDD[String] = sales.txt MapPartitionsRDD[5] at textFile at <console>:24
+
+scala> val pairs = lines.map(s=>(s.split(" ")(0), (s.split(" ")(1).toInt)))
+pairs: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[6] at map at <console>:26
+
+scala> pairs.collect()
+res2: Array[(String, Int)] = Array((bolt,45), (bolt,5), (drill,1), (drill,1), (screw,1), (screw,2), (screw,3), (washer,3), (screw,67), (screw,23), (nail,5), (screw,78), (bolt,5), (bolt,1), (drill,1), (drill,1), (washer,56), (washer,7))
+
+scala> val result = pairs.reduceByKey((a,b)=> a + b)
+result: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[7] at reduceByKey at <console>:28
+
+scala> result.collect()
+res3: Array[(String, Int)] = Array((screw,174), (nail,5), (washer,66), (bolt,56), (drill,4))
+
+
+//Task 2
+
+scala> case class Sale( name: String, total:Long)
+defined class Sale
+
+scala> val lines = sc.textFile("sales.txt")
+lines: org.apache.spark.rdd.RDD[String] = sales.txt MapPartitionsRDD[9] at textFile at <console>:24
+
+scala> val salesDS = lines.map(_.split(" ")).map(attributes=>Sale(attributes(0),attributes(1).toInt)).toDS()
+salesDS: org.apache.spark.sql.Dataset[Sale] = [name: string, total: bigint]
+
+scala> val totalSales = salesDS.groupBy($"name").sum("total")
+totalSales: org.apache.spark.sql.DataFrame = [name: string, sum(total): bigint]
+
+scala> totalSales.show()
++------+----------+                                                             
+|  name|sum(total)|
++------+----------+
+|washer|        66|
+|  bolt|        56|
+|  nail|         5|
+| drill|         4|
+| screw|       174|
++------+----------+
+
+
+//task 3
+
+scala> case class Sale( name: String, total:Long)
+defined class Sale
+
+scala> val lines = sc.textFile("sales.txt")
+lines: org.apache.spark.rdd.RDD[String] = sales.txt MapPartitionsRDD[22] at textFile at <console>:24
+
+scala> val salesDS = lines.map(_.split(" ")).map(attributes=>Sale(attributes(0),attributes(1).toInt)).toDS()
+salesDS: org.apache.spark.sql.Dataset[Sale] = [name: string, total: bigint]
+
+scala> salesDF.createOrReplaceTempView("sales")
+
+scala> val sqlSales = spark.sql("select name,sum(total) from sales group by name")
+sqlSales: org.apache.spark.sql.DataFrame = [name: string, sum(total): bigint]
+
+scala> sqlSales.show()
++------+----------+                                                             
+|  name|sum(total)|
++------+----------+
+|washer|        66|
+|  bolt|        56|
+|  nail|         5|
+| drill|         4|
+| screw|       174|
++------+----------+
+
+
+
+
