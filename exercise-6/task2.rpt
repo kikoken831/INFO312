@@ -1,0 +1,324 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+create 'task2', 'SUBMISSION','STUDENT','SUBJECT','FILES'
+0 row(s) in 2.5600 seconds
+
+Hbase::Table - task2
+
+put 'task2','student|007','STUDENT:snumber','007'
+0 row(s) in 0.2840 seconds
+
+put 'task2','student|007','STUDENT:fname','James'
+0 row(s) in 0.0140 seconds
+
+put 'task2','student|007','STUDENT:lname','Bond'
+0 row(s) in 0.0030 seconds
+
+put 'task2','student|007','STUDENT:degree','MIT'
+0 row(s) in 0.0040 seconds
+
+
+put 'task2','student|666','STUDENT:snumber','666'
+0 row(s) in 0.0040 seconds
+
+put 'task2','student|666','STUDENT:fname','Harry'
+0 row(s) in 0.0040 seconds
+
+put 'task2','student|666','STUDENT:lname','Potter'
+0 row(s) in 0.0040 seconds
+
+put 'task2','student|666','STUDENT:degree','BCS'
+0 row(s) in 0.0030 seconds
+
+
+put 'task2','subject|312','SUBJECT:code','312'
+0 row(s) in 0.0040 seconds
+
+put 'task2','subject|312','SUBJECT:title','Big Data'
+0 row(s) in 0.0050 seconds
+
+put 'task2','subject|312','SUBJECT:credits','6'
+0 row(s) in 0.0030 seconds
+
+
+put 'task2','subject|313','SUBJECT:code','313'
+0 row(s) in 0.0030 seconds
+
+put 'task2','subject|313','SUBJECT:title','Very Big Data'
+0 row(s) in 0.0030 seconds
+
+put 'task2','subject|313','SUBJECT:credits','12'
+0 row(s) in 0.0040 seconds
+
+
+put 'task2','submission|007|312|assignment|1','SUBMISSION:sdate','01-APR-2017'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|1','SUBMISSION:esignature','jb'
+0 row(s) in 0.0050 seconds
+
+put 'task2','submission|007|312|assignment|1','SUBMISSION:totalfiles','2'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|1','SUBMISSION:dayslate','0'
+0 row(s) in 0.0110 seconds
+
+put 'task2','submission|007|312|assignment|1','SUBMISSION:type','assignment'
+0 row(s) in 0.0050 seconds
+
+put 'task2','submission|007|312|assignment|1','SUBMISSION:tnumber','1'
+0 row(s) in 0.0050 seconds
+
+put 'task2','submission|007|312|assignment|1','STUDENT:snumbner','007'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|1','SUBJECT:code','312'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|007|312|assignment|1','FILES:fnumber1','path/file-name1-1'
+0 row(s) in 0.0100 seconds
+
+put 'task2','submission|007|312|assignment|1','FILES:fnumber2','path/file-name1-1'
+0 row(s) in 0.0090 seconds
+
+
+put 'task2','submission|007|312|assignment|2','SUBMISSION:sdate','02-APR-2017'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|2','SUBMISSION:esignature','jb'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|007|312|assignment|2','SUBMISSION:totalfiles','2'
+0 row(s) in 0.0090 seconds
+
+put 'task2','submission|007|312|assignment|2','SUBMISSION:dayslate','0'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|2','SUBMISSION:type','assignment'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|007|312|assignment|2','SUBMISSION:tnumber','2'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|2','STUDENT:snumbner','007'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|312|assignment|2','SUBJECT:code','312'
+0 row(s) in 0.0070 seconds
+
+put 'task2','submission|007|312|assignment|2','FILES:fnumbner1','path/file-name2-1'
+0 row(s) in 0.0090 seconds
+
+put 'task2','submission|007|312|assignment|2','FILES:fnumber2','path/file-name2-2'
+0 row(s) in 0.0040 seconds
+
+
+put 'task2','submission|007|313|project|1','SUBMISSION:sdate','02-APR-2017'
+0 row(s) in 0.0050 seconds
+
+put 'task2','submission|007|313|project|1','SUBMISSION:esignature','jb'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|007|313|project|1','SUBMISSION:totalfiles','2'
+0 row(s) in 0.0060 seconds
+
+put 'task2','submission|007|313|project|1','SUBMISSION:dayslate','0'
+0 row(s) in 0.0060 seconds
+
+put 'task2','submission|007|313|project|1','SUBMISSION:type','project'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|007|313|project|1','SUBMISSION:tnumber','2'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|007|313|project|1','STUDENT:snumbner','007'
+0 row(s) in 0.0110 seconds
+
+put 'task2','submission|007|313|project|1','SUBJECT:code','313'
+0 row(s) in 0.0120 seconds
+
+put 'task2','submission|007|313|project|1','FILES:fnumber1','path/file-name3-1'
+0 row(s) in 0.0090 seconds
+
+
+
+put 'task2','submission|666|312|assignment|1','SUBMISSION:sdate','01-APR-2017'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|1','SUBMISSION:esignature','hp'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|1','SUBMISSION:totalfiles','2'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|666|312|assignment|1','SUBMISSION:dayslate','0'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|1','SUBMISSION:type','assignment'
+0 row(s) in 0.0060 seconds
+
+put 'task2','submission|666|312|assignment|1','SUBMISSION:tnumber','1'
+0 row(s) in 0.0140 seconds
+
+put 'task2','submission|666|312|assignment|1','STUDENT:snumbner','666'
+0 row(s) in 0.0160 seconds
+
+put 'task2','submission|666|312|assignment|1','SUBJECT:code','312'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|1','FILES:fnumber1','path/file-name1-1'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|1','FILES:fnumber2','path/file-name1-1'
+0 row(s) in 0.0020 seconds
+
+
+put 'task2','submission|666|312|assignment|2','SUBMISSION:sdate','02-APR-2017'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|2','SUBMISSION:esignature','hp'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|2','SUBMISSION:totalfiles','2'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|2','SUBMISSION:dayslate','0'
+0 row(s) in 0.0080 seconds
+
+put 'task2','submission|666|312|assignment|2','SUBMISSION:type','assignment'
+0 row(s) in 0.0100 seconds
+
+put 'task2','submission|666|312|assignment|2','SUBMISSION:tnumber','2'
+0 row(s) in 0.0020 seconds
+
+put 'task2','submission|666|312|assignment|2','STUDENT:snumbner','666'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|2','SUBJECT:code','312'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|2','FILES:fnumber1','path/file-name2-1'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|312|assignment|2','FILES:fnumber2','path/file-name2-2'
+0 row(s) in 0.0030 seconds
+
+
+put 'task2','submission|666|313|project|1','SUBMISSION:sdate','02-APR-2017'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|313|project|1','SUBMISSION:esignature','hp'
+0 row(s) in 0.0040 seconds
+
+put 'task2','submission|666|313|project|1','SUBMISSION:totalfiles','2'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|313|project|1','SUBMISSION:dayslate','0'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|313|project|1','SUBMISSION:type','project'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|313|project|1','SUBMISSION:tnumber','2'
+0 row(s) in 0.0020 seconds
+
+put 'task2','submission|666|313|project|1','STUDENT:snumbner','666'
+0 row(s) in 0.0070 seconds
+
+put 'task2','submission|666|313|project|1','SUBJECT:code','313'
+0 row(s) in 0.0030 seconds
+
+put 'task2','submission|666|313|project|1','FILES:fnumber1','path/file-name3-1'
+0 row(s) in 0.0030 seconds
+
+
+describe 'task2'
+Table task2 is ENABLED
+task2
+COLUMN FAMILIES DESCRIPTION
+{NAME => 'FILES', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'STUDENT', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'SUBJECT', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'SUBMISSION', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+4 row(s) in 0.0370 seconds
+
+
+scan 'task2'
+ROW  COLUMN+CELL
+ student|007 column=STUDENT:degree, timestamp=1653562056433, value=MIT
+ student|007 column=STUDENT:fname, timestamp=1653562056383, value=James
+ student|007 column=STUDENT:lname, timestamp=1653562056402, value=Bond
+ student|007 column=STUDENT:snumber, timestamp=1653562056338, value=007
+ student|666 column=STUDENT:degree, timestamp=1653562056476, value=BCS
+ student|666 column=STUDENT:fname, timestamp=1653562056457, value=Harry
+ student|666 column=STUDENT:lname, timestamp=1653562056466, value=Potter
+ student|666 column=STUDENT:snumber, timestamp=1653562056445, value=666
+ subject|312 column=SUBJECT:code, timestamp=1653562056485, value=312
+ subject|312 column=SUBJECT:credits, timestamp=1653562056509, value=6
+ subject|312 column=SUBJECT:title, timestamp=1653562056499, value=Big Data
+ subject|313 column=SUBJECT:code, timestamp=1653562056530, value=313
+ subject|313 column=SUBJECT:credits, timestamp=1653562056546, value=12
+ subject|313 column=SUBJECT:title, timestamp=1653562056538, value=Very Big Data
+ submission|007|312|assignment|1 column=FILES:fnumber1, timestamp=1653562056661, value=path/file-name1-1
+ submission|007|312|assignment|1 column=FILES:fnumber2, timestamp=1653562056676, value=path/file-name1-1
+ submission|007|312|assignment|1 column=STUDENT:snumbner, timestamp=1653562056639, value=007
+ submission|007|312|assignment|1 column=SUBJECT:code, timestamp=1653562056653, value=312
+ submission|007|312|assignment|1 column=SUBMISSION:dayslate, timestamp=1653562056603, value=0
+ submission|007|312|assignment|1 column=SUBMISSION:esignature, timestamp=1653562056586, value=jb
+ submission|007|312|assignment|1 column=SUBMISSION:sdate, timestamp=1653562056573, value=01-APR-2017
+ submission|007|312|assignment|1 column=SUBMISSION:tnumber, timestamp=1653562056631, value=1
+ submission|007|312|assignment|1 column=SUBMISSION:totalfiles, timestamp=1653562056594, value=2
+ submission|007|312|assignment|1 column=SUBMISSION:type, timestamp=1653562056618, value=assignment
+ submission|007|312|assignment|2 column=FILES:fnumber2, timestamp=1653562056780, value=path/file-name2-2
+ submission|007|312|assignment|2 column=FILES:fnumbner1, timestamp=1653562056772, value=path/file-name2-1
+ submission|007|312|assignment|2 column=STUDENT:snumbner, timestamp=1653562056749, value=007
+ submission|007|312|assignment|2 column=SUBJECT:code, timestamp=1653562056756, value=312
+ submission|007|312|assignment|2 column=SUBMISSION:dayslate, timestamp=1653562056724, value=0
+ submission|007|312|assignment|2 column=SUBMISSION:esignature, timestamp=1653562056699, value=jb
+ submission|007|312|assignment|2 column=SUBMISSION:sdate, timestamp=1653562056692, value=02-APR-2017
+ submission|007|312|assignment|2 column=SUBMISSION:tnumber, timestamp=1653562056741, value=2
+ submission|007|312|assignment|2 column=SUBMISSION:totalfiles, timestamp=1653562056710, value=2
+ submission|007|312|assignment|2 column=SUBMISSION:type, timestamp=1653562056733, value=assignment
+ submission|007|313|project|1 column=FILES:fnumber1, timestamp=1653562056895, value=path/file-name3-1
+ submission|007|313|project|1 column=STUDENT:snumbner, timestamp=1653562056845, value=007
+ submission|007|313|project|1 column=SUBJECT:code, timestamp=1653562056882, value=313
+ submission|007|313|project|1 column=SUBMISSION:dayslate, timestamp=1653562056823, value=0
+ submission|007|313|project|1 column=SUBMISSION:esignature, timestamp=1653562056801, value=jb
+ submission|007|313|project|1 column=SUBMISSION:sdate, timestamp=1653562056792, value=02-APR-2017
+ submission|007|313|project|1 column=SUBMISSION:tnumber, timestamp=1653562056838, value=2
+ submission|007|313|project|1 column=SUBMISSION:totalfiles, timestamp=1653562056812, value=2
+ submission|007|313|project|1 column=SUBMISSION:type, timestamp=1653562056830, value=project
+ submission|666|312|assignment|1 column=FILES:fnumber1, timestamp=1653562057092, value=path/file-name1-1
+ submission|666|312|assignment|1 column=FILES:fnumber2, timestamp=1653562057098, value=path/file-name1-1
+ submission|666|312|assignment|1 column=STUDENT:snumbner, timestamp=1653562057081, value=666
+ submission|666|312|assignment|1 column=SUBJECT:code, timestamp=1653562057087, value=312
+ submission|666|312|assignment|1 column=SUBMISSION:dayslate, timestamp=1653562056925, value=0
+ submission|666|312|assignment|1 column=SUBMISSION:esignature, timestamp=1653562056910, value=hp
+ submission|666|312|assignment|1 column=SUBMISSION:sdate, timestamp=1653562056903, value=01-APR-2017
+ submission|666|312|assignment|1 column=SUBMISSION:tnumber, timestamp=1653562057034, value=1
+ submission|666|312|assignment|1 column=SUBMISSION:totalfiles, timestamp=1653562056917, value=2
+ submission|666|312|assignment|1 column=SUBMISSION:type, timestamp=1653562056961, value=assignment
+ submission|666|312|assignment|2 column=FILES:fnumber1, timestamp=1653562057163, value=path/file-name2-1
+ submission|666|312|assignment|2 column=FILES:fnumber2, timestamp=1653562057168, value=path/file-name2-2
+ submission|666|312|assignment|2 column=STUDENT:snumbner, timestamp=1653562057151, value=666
+ submission|666|312|assignment|2 column=SUBJECT:code, timestamp=1653562057157, value=312
+ submission|666|312|assignment|2 column=SUBMISSION:dayslate, timestamp=1653562057123, value=0
+ submission|666|312|assignment|2 column=SUBMISSION:esignature, timestamp=1653562057111, value=hp
+ submission|666|312|assignment|2 column=SUBMISSION:sdate, timestamp=1653562057105, value=02-APR-2017
+ submission|666|312|assignment|2 column=SUBMISSION:tnumber, timestamp=1653562057146, value=2
+ submission|666|312|assignment|2 column=SUBMISSION:totalfiles, timestamp=1653562057117, value=2
+ submission|666|312|assignment|2 column=SUBMISSION:type, timestamp=1653562057140, value=assignment
+ submission|666|313|project|1 column=FILES:fnumber1, timestamp=1653562057223, value=path/file-name3-1
+ submission|666|313|project|1 column=STUDENT:snumbner, timestamp=1653562057208, value=666
+ submission|666|313|project|1 column=SUBJECT:code, timestamp=1653562057217, value=313
+ submission|666|313|project|1 column=SUBMISSION:dayslate, timestamp=1653562057191, value=0
+ submission|666|313|project|1 column=SUBMISSION:esignature, timestamp=1653562057180, value=hp
+ submission|666|313|project|1 column=SUBMISSION:sdate, timestamp=1653562057174, value=02-APR-2017
+ submission|666|313|project|1 column=SUBMISSION:tnumber, timestamp=1653562057202, value=2
+ submission|666|313|project|1 column=SUBMISSION:totalfiles, timestamp=1653562057186, value=2
+ submission|666|313|project|1 column=SUBMISSION:type, timestamp=1653562057197, value=project
+10 row(s) in 0.0950 seconds
+
+

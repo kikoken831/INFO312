@@ -1,0 +1,121 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+#Kendrick Kee
+#7366814
+
+#Task 1
+#find all information about a student number 007
+
+get 'task2' , 'student|007', {COLUMN=>'STUDENT',VERSIONS=>1}
+COLUMN  CELL
+ STUDENT:degree timestamp=1653562056433, value=MIT
+ STUDENT:fname timestamp=1653562056383, value=James
+ STUDENT:lname timestamp=1653562056402, value=Bond
+ STUDENT:snumber timestamp=1653562056338, value=007
+4 row(s) in 0.4560 seconds
+
+
+#Task 2
+#find all information about a submission of assignment 1 performed by a student 006 in a subject 312
+
+get 'task2' , 'submission|007|312|assignment|1', {COLUMNS=>['SUBMISSION','STUDENT','SUBJECT','FILES'],VERSIONS=>1}
+COLUMN  CELL
+ FILES:fnumber1 timestamp=1653562056661, value=path/file-name1-1
+ FILES:fnumber2 timestamp=1653562056676, value=path/file-name1-1
+ STUDENT:snumbner timestamp=1653562056639, value=007
+ SUBJECT:code timestamp=1653562056653, value=312
+ SUBMISSION:dayslate timestamp=1653562056603, value=0
+ SUBMISSION:esignature timestamp=1653562056586, value=jb
+ SUBMISSION:sdate timestamp=1653562056573, value=01-APR-2017
+ SUBMISSION:tnumber timestamp=1653562056631, value=1
+ SUBMISSION:totalfiles timestamp=1653562056594, value=2
+ SUBMISSION:type timestamp=1653562056618, value=assignment
+10 row(s) in 0.0180 seconds
+
+
+#Task 3
+#Find the first and last names of all students
+
+scan 'task2', {COLUMNS=>['STUDENT:fname','STUDENT:lname'], VERSIONS=>1}
+ROW  COLUMN+CELL
+ student|007 column=STUDENT:fname, timestamp=1653562056383, value=James
+ student|007 column=STUDENT:lname, timestamp=1653562056402, value=Bond
+ student|666 column=STUDENT:fname, timestamp=1653562056457, value=Harry
+ student|666 column=STUDENT:lname, timestamp=1653562056466, value=Potter
+2 row(s) in 0.0330 seconds
+
+
+#Task 4
+#Find all information about a student whose lastname is Potter, list one version per cell.
+
+scan 'task2' ,{COLUMNS=>['STUDENT'],FILTER=>"SingleColumnValueFilter('STUDENT','lname',=,'binary:Potter',true,false)"}
+ROW  COLUMN+CELL
+ student|666 column=STUDENT:degree, timestamp=1653562056476, value=BCS
+ student|666 column=STUDENT:fname, timestamp=1653562056457, value=Harry
+ student|666 column=STUDENT:lname, timestamp=1653562056466, value=Potter
+ student|666 column=STUDENT:snumber, timestamp=1653562056445, value=666
+1 row(s) in 0.0570 seconds
+
+
+
+#Task 5
+#Delete a column family FILES.
+
+alter 'task2' , 'delete' => 'FILES'
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 3.0440 seconds
+
+
+
+#Task 6
+#Add a column family ENROLMENT that contains information about dates when the subjects have been enrolled by the students and allow for 2 versions in each cell of the column family.
+alter 'task2' , {NAME => 'ENROLMENT' , VERSIONS=>2}
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+0 row(s) in 1.9040 seconds
+
+
+#Task 7
+#Insert information about at least two enrolments performed by the students
+
+put 'task2' , 'enrolment|007|312' , 'ENROLMENT:enrolled-on' , '31/12/2021'
+0 row(s) in 0.1000 seconds
+
+put 'task2' , 'enrolment|666|314' , 'ENROLMENT:enrolled-on' , '30/11/2021'
+0 row(s) in 0.0210 seconds
+
+
+#Task 8
+#List information about all enrolments performed by the students.
+
+scan 'task2' , {COLUMN => 'ENROLMENT'}
+ROW  COLUMN+CELL
+ enrolment|007|312 column=ENROLMENT:enrolled-on, timestamp=1653562165624, value=31/12/2021
+ enrolment|666|314 column=ENROLMENT:enrolled-on, timestamp=1653562165653, value=30/11/2021
+2 row(s) in 0.0090 seconds
+
+
+#Task 9
+#Increase the total number of versions in each cell of a column family ENROLMENT
+alter 'task2' , {NAME => 'ENROLMENT' , VERSIONS=>5}
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 3.1850 seconds
+
+
+#Task 10
+#Delete HBase table task2
+disable 'task2'
+0 row(s) in 2.3180 seconds
+
+drop 'task2'
+0 row(s) in 1.2640 seconds
+

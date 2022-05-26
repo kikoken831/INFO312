@@ -1,0 +1,159 @@
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
+
+/* Student Name: Kendrick Kee */
+SyntaxError: (RegexpError) target of repeat operator is not specified: /* Student Name: Kendrick Kee */
+
+/* Student Number: 7366814 */
+SyntaxError: (RegexpError) target of repeat operator is not specified: /* Student Number: 7366814 */
+
+create 'SOLUTION1','EMPLOYEE', 'DEPARTMENT' , 'PROJECT'
+0 row(s) in 2.5980 seconds
+
+Hbase::Table - SOLUTION1
+
+
+
+
+
+
+put 'SOLUTION1' , 'project|312' , 'PROJECT:code', '312'
+0 row(s) in 0.2910 seconds
+
+put 'SOLUTION1' , 'project|312' , 'PROJECT:title', 'DBMS project'
+0 row(s) in 0.0080 seconds
+
+put 'SOLUTION1' , 'project|312' , 'PROJECT:salary' , '8000'
+0 row(s) in 0.0230 seconds
+
+
+put 'SOLUTION1' , 'project|314' , 'PROJECT:code', '314'
+0 row(s) in 0.0120 seconds
+
+put 'SOLUTION1' , 'project|314' , 'PROJECT:title', 'Azure project'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'project|314' , 'PROJECT:salary' , '7500'
+0 row(s) in 0.0100 seconds
+
+
+put 'SOLUTION1' , 'employee|312|ICT|001', 'EMPLOYEE:enumber', '001'
+0 row(s) in 0.0140 seconds
+
+put 'SOLUTION1' , 'employee|312|ICT|001', 'EMPLOYEE:first-name', 'Kendrick'
+0 row(s) in 0.0060 seconds
+
+put 'SOLUTION1' , 'employee|312|ICT|001', 'EMPLOYEE:last-name', 'Kee'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'employee|312|ICT|001', 'EMPLOYEE:salary', '67000'
+0 row(s) in 0.0050 seconds
+
+put 'SOLUTION1' , 'employee|312|ICT|001', 'PROJECT:code' , '312'
+0 row(s) in 0.0040 seconds
+
+put 'SOLUTION1' , 'employee|312|ICT|001', 'DEPARTMENT:name' , 'Infocom Technology'
+0 row(s) in 0.0040 seconds
+
+
+put 'SOLUTION1' , 'employee|314|ICT|002', 'EMPLOYEE:enumber', '002'
+0 row(s) in 0.0100 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|002', 'EMPLOYEE:first-name', 'John'
+0 row(s) in 0.0050 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|002', 'EMPLOYEE:last-name', 'Smith'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|002', 'EMPLOYEE:salary', '100000'
+0 row(s) in 0.0040 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|002', 'PROJECT:code' , '314'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|002', 'DEPARTMENT:name' , 'Infocom Technology'
+0 row(s) in 0.0050 seconds
+
+
+put 'SOLUTION1' , 'employee|314|ICT|003', 'EMPLOYEE:enumber', '003'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|003', 'EMPLOYEE:first-name', 'Adam'
+0 row(s) in 0.0730 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|003', 'EMPLOYEE:last-name', 'Swanson'
+0 row(s) in 0.0130 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|003', 'EMPLOYEE:salary', '1000000'
+0 row(s) in 0.0040 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|003', 'PROJECT:code' , '314'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'employee|314|ICT|003', 'DEPARTMENT:name' , 'Infocom Technology'
+0 row(s) in 0.0050 seconds
+
+
+
+put 'SOLUTION1' , 'department|003|ICT', 'DEPARTMENT:name', 'Infocom Technology'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'department|003|ICT', 'DEPARTMENT:budget', '1000000'
+0 row(s) in 0.0030 seconds
+
+put 'SOLUTION1' , 'department|003|ICT', 'EMPLOYEE:enumber' , '003'
+0 row(s) in 0.0040 seconds
+
+
+
+
+describe 'SOLUTION1'
+Table SOLUTION1 is ENABLED
+SOLUTION1
+COLUMN FAMILIES DESCRIPTION
+{NAME => 'DEPARTMENT', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'EMPLOYEE', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+{NAME => 'PROJECT', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}
+3 row(s) in 0.0360 seconds
+
+
+scan 'SOLUTION1'
+ROW  COLUMN+CELL
+ department|003|ICT column=DEPARTMENT:budget, timestamp=1653561973539, value=1000000
+ department|003|ICT column=DEPARTMENT:name, timestamp=1653561973532, value=Infocom Technology
+ department|003|ICT column=EMPLOYEE:enumber, timestamp=1653561973546, value=003
+ employee|312|ICT|001 column=DEPARTMENT:name, timestamp=1653561973302, value=Infocom Technology
+ employee|312|ICT|001 column=EMPLOYEE:enumber, timestamp=1653561973204, value=001
+ employee|312|ICT|001 column=EMPLOYEE:first-name, timestamp=1653561973225, value=Kendrick
+ employee|312|ICT|001 column=EMPLOYEE:last-name, timestamp=1653561973235, value=Kee
+ employee|312|ICT|001 column=EMPLOYEE:salary, timestamp=1653561973245, value=67000
+ employee|312|ICT|001 column=PROJECT:code, timestamp=1653561973291, value=312
+ employee|314|ICT|002 column=DEPARTMENT:name, timestamp=1653561973378, value=Infocom Technology
+ employee|314|ICT|002 column=EMPLOYEE:enumber, timestamp=1653561973319, value=002
+ employee|314|ICT|002 column=EMPLOYEE:first-name, timestamp=1653561973328, value=John
+ employee|314|ICT|002 column=EMPLOYEE:last-name, timestamp=1653561973344, value=Smith
+ employee|314|ICT|002 column=EMPLOYEE:salary, timestamp=1653561973355, value=100000
+ employee|314|ICT|002 column=PROJECT:code, timestamp=1653561973363, value=314
+ employee|314|ICT|003 column=DEPARTMENT:name, timestamp=1653561973519, value=Infocom Technology
+ employee|314|ICT|003 column=EMPLOYEE:enumber, timestamp=1653561973389, value=003
+ employee|314|ICT|003 column=EMPLOYEE:first-name, timestamp=1653561973397, value=Adam
+ employee|314|ICT|003 column=EMPLOYEE:last-name, timestamp=1653561973487, value=Swanson
+ employee|314|ICT|003 column=EMPLOYEE:salary, timestamp=1653561973497, value=1000000
+ employee|314|ICT|003 column=PROJECT:code, timestamp=1653561973506, value=314
+ project|312 column=PROJECT:code, timestamp=1653561973043, value=312
+ project|312 column=PROJECT:salary, timestamp=1653561973133, value=8000
+ project|312 column=PROJECT:title, timestamp=1653561973101, value=DBMS project
+ project|314 column=PROJECT:code, timestamp=1653561973146, value=314
+ project|314 column=PROJECT:salary, timestamp=1653561973188, value=7500
+ project|314 column=PROJECT:title, timestamp=1653561973169, value=Azure project
+6 row(s) in 0.0610 seconds
+
+
+disable 'SOLUTION1'
+0 row(s) in 2.2740 seconds
+
+
+drop 'SOLUTION1'
+0 row(s) in 1.2660 seconds
+
